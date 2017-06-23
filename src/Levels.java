@@ -4,6 +4,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 import java.awt.Button;
+import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -54,6 +55,8 @@ public class Levels extends JPanel implements ActionListener{
 				mainPane.setLayout(new BoxLayout(mainPane, BoxLayout.X_AXIS));
 				mainPane.add(board);
 				mainPane.add(buttonPane);
+				board.setPreferredSize(new Dimension(414, 200));
+				
 				//topFrame.addMouseListener(board);
 				//topFrame.addMouseMotionListener(board);
 				board.addMouseListener(board);

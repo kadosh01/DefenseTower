@@ -11,7 +11,8 @@ public class Tower implements Tickable{
 	public Cell location;
 	public double speed;
 	protected Cell[][] board;
-	public static final int size=40;
+	public static final int size=35;
+	public static final int Hsize=75;
 	public Image[] m;
 	public Image im;
 	public int counter;

@@ -41,7 +41,7 @@ public class Game extends JPanel implements ActionListener , MouseListener,Mouse
 	private Cell end;
 	private BufferedImage[][] map;
 	private Timer timer;
-	public final static int size=25;
+	public final static int size=20;
 	public final static int gamespeed=1;
 	public static final int delay=(1000/(size)/gamespeed);
 	public static final int creepsize=Creep.size;
@@ -54,6 +54,10 @@ public class Game extends JPanel implements ActionListener , MouseListener,Mouse
 	public JFrame topFrame ;
 	private Graphics g;
 	private Point erea;
+	public Image move;
+	public Image overly;
+	public static int settower=0;
+	public static final int HIGH=size*34;
 	/**
 	 * Create the panel.
 	 * @throws IOException 
@@ -63,8 +67,9 @@ public class Game extends JPanel implements ActionListener , MouseListener,Mouse
 		this.buttonPane = buttonPane;
 		this.g=super.getGraphics();
 		setLayout(null);
-		//setBounds(0, 0, 800, 1000);
-		setPreferredSize( new Dimension( 800, 1000 ) );
+		setBounds(10, 10, 1700, 1300);
+		overly = ImageIO.read(getClass().getResourceAsStream("/overly.png"));
+		//setPreferredSize( new Dimension( 800, 600 ) );
 		timer = new Timer(delay, this);
 		startBtn = new JButton("start");
 		buttonPane.add(startBtn);
@@ -158,37 +163,58 @@ public class Game extends JPanel implements ActionListener , MouseListener,Mouse
 			int numOfTowers = Towers.size();
 			for(int i=0;i<numOfTowers;i++){
 				Tower t=Towers.get(i);
-				System.out.println("P x: "+t.x+" y: "+t.y);
-				offGr.drawImage(t.im, t.y, t.x, 50, 100, this);
+				//System.out.println("P x: "+t.x+" y: "+t.y);
+				offGr.drawImage(t.im, t.y, t.x, Tower.size, Tower.size, this);
 			}
 				
 										
 				
 				creep++;
 			//erea paint
-			BufferedImage move;
-			try {
-				if(erea!=null){
-				
-				move = ImageIO.read(getClass().getResourceAsStream("/overly.png"));
-				offGr.drawImage(move, erea.x, erea.y , 50,50,this);
-				}
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			g.drawImage(offIm, 0, 0, this);
+			
+			
+			
 		} catch (Exception e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		
+		/// tower set
+		try {
+		if(settower!=0){
+			if(settower==1){
+				
+					move=ImageIO.read(getClass().getResourceAsStream("/tower1.png"));
+								
+								for(int i=0;i<2;i++){
+									for(int j=0;j<2;j++){
+										if(board[(erea.x*32)/800+j][(erea.y*32)/800+i].isRoad())
+										offGr.drawImage(overly, erea.x, erea.y, size,size,this);
+									}
+									}
+								
+								
+								offGr.drawImage(move, erea.x-size, erea.y-Tower.Hsize ,Tower.size,Tower.size*2,this);
+								
+			}
+			
+		}
+		else{
+			if(erea!=null){
+				System.out.println("asda");
+				offGr.drawImage(overly, erea.x, erea.y , size*2,size*2,this);
+				}
+		}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		g.drawImage(offIm, 0, 0, this);
 		// grid
 		
-		for(int i=0;i<800/size;i++){
+		for(int i=0;i<getWidth()/size;i++){
 			g.setColor(Color.BLACK);
 			g.drawLine(i*size, 0, i*size, 800);
-			for(int j=0;j<800/size;j++){
+			for(int j=0;j<getHeight()/size;j++){
 		g.setColor(Color.BLACK);
 		g.drawLine(0, j*size, 800, j*size);
 			}

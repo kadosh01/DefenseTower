@@ -72,9 +72,10 @@ public class towerswin extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
-					parent.addTower(new PosionTower(x-Tower.size-10,y));
-					System.out.println("x: "+x+" y: "+y);
-				} catch (IOException e1) {
+					Game.settower=1;
+					//parent.addTower(new PosionTower(x-Tower.size-10,y));
+					//System.out.println("x: "+x+" y: "+y);
+				} catch (Exception e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
