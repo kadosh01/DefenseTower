@@ -9,6 +9,7 @@ public class PosionTower extends Tower{
 	public PosionTower(int x, int y) throws IOException {
 		super(x, y);
 		m=new Image[path.length];
+		hitArea=2;
 		for(int i=0;i<m.length;i++)
 			m[i]=ImageIO.read(getClass().getResourceAsStream(path[i]));
 		im=m[0];

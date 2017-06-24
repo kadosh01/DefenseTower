@@ -8,6 +8,7 @@ public class ArrowTower extends Tower{
 	
 	public ArrowTower(int x, int y) throws IOException {
 		super(x, y);
+		this.hitArea=1;
 		m=new Image[path.length];
 		for(int i=0;i<m.length;i++)
 			m[i]=ImageIO.read(getClass().getResourceAsStream(path[i]));

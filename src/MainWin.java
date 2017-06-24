@@ -35,7 +35,7 @@ public class MainWin extends JFrame implements ActionListener{
 	 */
 	public MainWin() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(250, 0, 1000, Game.HIGH);
+		setBounds(250, 0, 800, Game.HIGH+50);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);

@@ -55,7 +55,8 @@ public class Levels extends JPanel implements ActionListener{
 				mainPane.setLayout(new BoxLayout(mainPane, BoxLayout.X_AXIS));
 				mainPane.add(board);
 				mainPane.add(buttonPane);
-				board.setPreferredSize(new Dimension(414, 200));
+				board.setPreferredSize(new Dimension(Game.HIGH,Game.HIGH));
+				//board.setBounds(40, 40, 200,200 );
 				
 				//topFrame.addMouseListener(board);
 				//topFrame.addMouseMotionListener(board);

@@ -11,11 +11,12 @@ public class Tower implements Tickable{
 	public Cell location;
 	public double speed;
 	protected Cell[][] board;
-	public static final int size=35;
+	public static final int size=25;
 	public static final int Hsize=75;
 	public Image[] m;
 	public Image im;
 	public int counter;
+	public int hitArea;
 	
 	
 	public Tower(int x,int y) throws IOException{
@@ -31,6 +32,10 @@ public class Tower implements Tickable{
 		counter++;
 		im=m[counter%m.length];
 		
+	}
+	public void setLocation(int x,int y){
+		this.x=x;
+		this.y=y;
 	}
 
 }

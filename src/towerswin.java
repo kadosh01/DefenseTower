@@ -32,7 +32,7 @@ public class towerswin extends JFrame{
 		this.y=y;
 		setLayout(null);
 		setBackground(Color.DARK_GRAY);
-		setBounds(y-50, x,width, high);
+		setBounds(y+100, x,width, high);
 		System.out.println("x: "+x+" y: "+y);
 		//this.setType(getType().UTILITY);
 		JButton arrow=new JButton("");
@@ -46,8 +46,9 @@ public class towerswin extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
-					parent.addTower(new ArrowTower(x-Tower.size-10,y));
-					System.out.println("x: "+x+" y: "+y);
+					Game.settower=new ArrowTower(0,0);
+					//parent.addTower(new ArrowTower(x-Tower.size-10,y));
+					//System.out.println("x: "+x+" y: "+y);
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -72,7 +73,7 @@ public class towerswin extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
-					Game.settower=1;
+					Game.settower=new PosionTower(0,0);
 					//parent.addTower(new PosionTower(x-Tower.size-10,y));
 					//System.out.println("x: "+x+" y: "+y);
 				} catch (Exception e1) {

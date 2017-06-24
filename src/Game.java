@@ -41,7 +41,7 @@ public class Game extends JPanel implements ActionListener , MouseListener,Mouse
 	private Cell end;
 	private BufferedImage[][] map;
 	private Timer timer;
-	public final static int size=20;
+	public final static int size=25;
 	public final static int gamespeed=1;
 	public static final int delay=(1000/(size)/gamespeed);
 	public static final int creepsize=Creep.size;
@@ -56,8 +56,8 @@ public class Game extends JPanel implements ActionListener , MouseListener,Mouse
 	private Point erea;
 	public Image move;
 	public Image overly;
-	public static int settower=0;
-	public static final int HIGH=size*34;
+	public static Tower settower;
+	public static final int HIGH=size*28;
 	/**
 	 * Create the panel.
 	 * @throws IOException 
@@ -67,9 +67,9 @@ public class Game extends JPanel implements ActionListener , MouseListener,Mouse
 		this.buttonPane = buttonPane;
 		this.g=super.getGraphics();
 		setLayout(null);
-		setBounds(10, 10, 1700, 1300);
+		//setBounds(10, 10, 1700, 1300);
 		overly = ImageIO.read(getClass().getResourceAsStream("/overly.png"));
-		//setPreferredSize( new Dimension( 800, 600 ) );
+		setPreferredSize( new Dimension( 800, 1600 ) );
 		timer = new Timer(delay, this);
 		startBtn = new JButton("start");
 		buttonPane.add(startBtn);
@@ -130,95 +130,101 @@ public class Game extends JPanel implements ActionListener , MouseListener,Mouse
 		Image offIm = createImage(getSize().width, getSize().height);
 		Graphics offGr = offIm.getGraphics();
 		
-		try {
-			
-			for (int i=0; i<map.length; i++){
-				
-				for(int j=0; j<map[i].length; j++){
-							offGr.drawImage(map[i][j], j*size, i*size,size,size, null);
-						
-								
-							
-							
-				}
-				
+		for (int i=0; i<map.length; i++){
+			for(int j=0; j<map[i].length; j++){
+						offGr.drawImage(map[i][j], j*size, i*size,size,size, null);
 			}
-			
-			//for(int i=0;i<800/size;i++)
-				
-				
-			//if(erea!=null)
-				//offGr.drawImage(move, erea.x, erea.y,size,size, null);
-			
-			int numOfCreeps = wave.size();
-			while(creep<numOfCreeps){
-				//System.out.println("creep: "+creep);
-				Creep k = wave.get(creep);
-				
-					offGr.drawImage(k.im, k.y, k.x, creepsize, creepsize, this);					
-				
-				creep++;
-			}
-			creep = 0;
-			int numOfTowers = Towers.size();
-			for(int i=0;i<numOfTowers;i++){
-				Tower t=Towers.get(i);
-				//System.out.println("P x: "+t.x+" y: "+t.y);
-				offGr.drawImage(t.im, t.y, t.x, Tower.size, Tower.size, this);
-			}
-				
-										
-				
-				creep++;
-			//erea paint
-			
-			
-			
-		} catch (Exception e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
 		}
-		/// tower set
-		try {
-		if(settower!=0){
-			if(settower==1){
-				
-					move=ImageIO.read(getClass().getResourceAsStream("/tower1.png"));
-								
-								for(int i=0;i<2;i++){
-									for(int j=0;j<2;j++){
-										if(board[(erea.x*32)/800+j][(erea.y*32)/800+i].isRoad())
-										offGr.drawImage(overly, erea.x, erea.y, size,size,this);
-									}
-									}
-								
-								
-								offGr.drawImage(move, erea.x-size, erea.y-Tower.Hsize ,Tower.size,Tower.size*2,this);
-								
-			}
-			
+		int numOfCreeps = wave.size();
+		while(creep<numOfCreeps){
+			//System.out.println("creep: "+creep);
+			Creep k = wave.get(creep);
+			offGr.drawImage(k.im, k.y, k.x, creepsize, creepsize, this);					
+			creep++;
 		}
-		else{
-			if(erea!=null){
-				System.out.println("asda");
-				offGr.drawImage(overly, erea.x, erea.y , size*2,size*2,this);
-				}
-		}
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		g.drawImage(offIm, 0, 0, this);
-		// grid
+		creep = 0;
 		
-		for(int i=0;i<getWidth()/size;i++){
-			g.setColor(Color.BLACK);
-			g.drawLine(i*size, 0, i*size, 800);
-			for(int j=0;j<getHeight()/size;j++){
-		g.setColor(Color.BLACK);
-		g.drawLine(0, j*size, 800, j*size);
-			}
+		int numOfTowers = Towers.size();
+		for(int i=0;i<numOfTowers;i++){
+			Tower t=Towers.get(i);
+			//System.out.println("P x: "+t.x+" y: "+t.y);
+			offGr.drawImage(t.im, t.y, t.x-Tower.size, Tower.size, Tower.size*2, this);
 		}
+			
+									
+			
+			creep++;
+		//erea paint
+		
+		
+		
+/// tower set
+	if(erea!=null){
+	offGr.drawImage(overly, erea.x, erea.y , size,size,this);
+	}			
+if(settower!=null){
+		int locy=(erea.x*28)/HIGH;
+		int locx=(erea.y*28)/HIGH;
+		move=settower.im;
+		if(settower.hitArea==1){///////
+			
+				
+							
+					if(locx+1<board.length & locy+1<board[0].length & locy-1>=0 & locx-1>=0){
+						if(board[locx-1][locy].isRoad())
+							offGr.drawImage(overly, erea.x, erea.y-size, size,size,this);
+						if(board[locx+1][locy].isRoad())
+							offGr.drawImage(overly, erea.x, erea.y+size, size,size,this);
+						if(board[locx][locy+1].isRoad())
+							offGr.drawImage(overly, erea.x+size, erea.y, size,size,this);
+						if(board[locx][locy-1].isRoad())
+							offGr.drawImage(overly, erea.x-size, erea.y, size,size,this);
+						
+					}
+		}
+					if(settower.hitArea==2){///////
+						if(locx+1<board.length & locy+1<board[0].length & locy-1>=0 & locx-1>=0){
+							if(board[locx-1][locy].isRoad())
+								offGr.drawImage(overly, erea.x, erea.y-size, size,size,this);
+							if(board[locx+1][locy+1].isRoad())
+								offGr.drawImage(overly, erea.x+size, erea.y+size, size,size,this);
+							if(board[locx-1][locy-1].isRoad())
+								offGr.drawImage(overly, erea.x-size, erea.y-size, size,size,this);
+							if(board[locx-1][locy+1].isRoad())
+								offGr.drawImage(overly, erea.x+size, erea.y-size, size,size,this);
+							if(board[locx+1][locy-1].isRoad())
+								offGr.drawImage(overly, erea.x-size, erea.y+size, size,size,this);
+							if(board[locx+1][locy].isRoad())
+								offGr.drawImage(overly, erea.x, erea.y+size, size,size,this);
+							if(board[locx][locy+1].isRoad())
+								offGr.drawImage(overly, erea.x+size, erea.y, size,size,this);
+							if(board[locx][locy-1].isRoad())
+								offGr.drawImage(overly, erea.x-size, erea.y, size,size,this);
+							
+						}
+							
+		}
+		
+		offGr.drawImage(move, erea.x, erea.y-Tower.size ,Tower.size,Tower.size*2,this);
+		
+
+
+		
+
+}
+
+
+g.drawImage(offIm, 0, 0, this);
+// grid
+
+for(int i=0;i<Game.HIGH/size;i++){
+		g.setColor(Color.BLACK);
+		g.drawLine(i*size, 0, i*size,Game.HIGH);
+		for(int j=0;j<Game.HIGH/size;j++){
+			g.setColor(Color.BLACK);
+			g.drawLine(0, j*size, Game.HIGH, j*size);
+		}
+}
 		
 	}
  public void addTower(Tower t){
@@ -283,19 +289,23 @@ public class Game extends JPanel implements ActionListener , MouseListener,Mouse
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		topFrame = (JFrame) SwingUtilities.windowForComponent(this);
-		int y = (e.getX()/size)*size;
-		int x = (e.getY()/size)*size;
-		if( ((x*32)/800+1 <board.length & (y*32)/800+1<board[0].length ) && (!board[(x*32)/800][(y*32)/800].isRoad() & !board[((x*32)/800)+1][((y*32)/800)+1].isRoad() & !board[((x*32)/800)][((y*32)/800)+1].isRoad() & !board[((x*32)/800)+1][((y*32)/800)].isRoad())){
-			towerswin win=new towerswin(x, y,this);
+		int y=(erea.x*28)/HIGH;
+		int x=(erea.y*28)/HIGH;
+			if(settower==null){
+			towerswin win=new towerswin(erea.y, erea.x,this);
 			win.setVisible(true);
 			this.validate();
-			//topFrame.add(win);
-		}
-			
+			}
+				if(settower!=null){
+				if((x+1 <board.length & y+1<board[0].length ) && (!board[x][y].isRoad())){
+				settower.setLocation(erea.y, erea.x);
+				addTower(settower);
+				settower=null;
+				}
+			}
+				System.out.println("click  "+x+ "  y: "+y);
+				System.out.println(("road: "+board[(x*28)/HIGH][(y*28)/HIGH].isRoad()));
 			repaint();
-		
-		//}
-		
 	}
 
 	@Override
@@ -335,6 +345,10 @@ public class Game extends JPanel implements ActionListener , MouseListener,Mouse
 		int x = (e.getX()/size)*size;
 		int y = (e.getY()/size)*size;
 		this.erea=new Point(x, y);
+		System.out.println("move  "+x+ "  y: "+y);
+		System.out.println(board.length +"  "+board[0].length);
+		
+		
 		
 		repaint();
 		
