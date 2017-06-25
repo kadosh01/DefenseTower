@@ -9,12 +9,16 @@ import javax.swing.ImageIcon;
 public class Knight extends Creep{
 	
 	private final String[] path={"/Knight/Layer 4.png","/Knight/Layer 5.png","/Knight/Layer 6.png","/Knight/Layer 7.png","/Knight/Layer 8.png","/Knight/Layer 9.png","/Knight/Layer 10.png","/Knight/Layer 11.png","/Knight/Layer 12.png","/Knight/Layer 13.png"};
+	protected double poison;
+	protected double poisonTime;
 	
 	public Knight(int x,int y, Cell cell, Cell[][] board) throws IOException{
 		super(cell, board);
 		this.speed=1;
 		this.x=x;
 		this.y=y;
+		this.poison = 1;
+		this.poisonTime = 0;
 		m=new Image[path.length];
 		for(int i=0;i<m.length;i++)
 			m[i]=ImageIO.read(getClass().getResourceAsStream(path[i]));
@@ -31,10 +35,9 @@ public class Knight extends Creep{
 			im=m[counter%m.length];
 			if(counter%(1000/Game.delay)==0){
 				location = board[curr._x+curr.next_x][curr._y+curr.next_y];
+				poisonTime--;
 			}
-		}
-		
-		
+		}		
 	}
 	@Override
 	public void accept(Visitor v) {

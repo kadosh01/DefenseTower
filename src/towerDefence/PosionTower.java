@@ -1,5 +1,7 @@
 package towerDefence;
 
+import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.Image;
 import java.io.IOException;
 
@@ -25,13 +27,13 @@ public class PosionTower extends Tower{
 		Creep c = (Creep)t;
 		int creepx = c.x;
 		int creepy = c.y;
+		//System.out.println(c+" life: "+c.life);
 		System.out.println("tower: "+x+"  "+y);
-		System.out.println("creep: "+c.x+" "+c.y);
-		System.out.println((creepx>=x-hitArea*Game.size & creepx<=x+hitArea*Game.size));
-		System.out.println((creepy>=y-hitArea*Game.size & creepy<=y+hitArea*Game.size));
-		
-		if((creepx>=x-hitArea*Game.size & creepx<=x+hitArea*Game.size) | (creepy>=y-hitArea*Game.size & creepy<=y+hitArea*Game.size)){
-			
+		System.out.println(c+"  "+creepx+"  "+creepy);
+		if((creepx>=(x/Game.size)-hitArea*Game.size & creepx<=(x/Game.size)*Game.size+hitArea*Game.size) & (creepy>=(y/Game.size)-hitArea*Game.size & creepy<=(y/Game.size)*Game.size+hitArea*Game.size)){
+			if(counter%(1000/Game.delay)==0)
+				c.hit(this);
+			System.out.println("hit");
 		}
 		counter++;
 		im=m[counter%m.length];
@@ -40,14 +42,16 @@ public class PosionTower extends Tower{
 
 	@Override
 	public void visit(Knight k) {
-		
-		
+		k.poison = 2;
+		k.poisonTime = 5;
+		k.im = null;
 	}
 
 	@Override
 	public void visit(Skeleton s) {
 		s.life = s.life-20;
 		s.im = null;
+		
 	}
 
 	@Override
@@ -58,8 +62,9 @@ public class PosionTower extends Tower{
 
 	@Override
 	public void visit(Naji n) {
-		// TODO Auto-generated method stub
-		
+		n.poison = 1.5;
+		n.poisonTime = 5;	
+		n.im = null;
 	}
 
 	
