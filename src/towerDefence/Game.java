@@ -121,7 +121,7 @@ public class Game extends JPanel implements ActionListener , MouseListener,Mouse
 
 		wave = new LinkedList<Creep>();
 		this.Towers=new LinkedList<>();
-		creeps = game.wave(1);
+		creeps = game.wave(2);
 
 	}
 
@@ -227,9 +227,10 @@ public void actionPerformed(ActionEvent e) {
 		}			
 
 		if(e.getSource()==timer){
-			int numOfCreeps = wave.size();
-			for(int i=0; i<numOfCreeps; i++){
+			for(int i=0; i<wave.size(); i++){
 				Creep k = wave.get(i);
+				if(k.life<=0)
+					wave.remove(k);
 				k.tickHAppend(null);
 				if((k.location==end)){
 					wave.remove(k);

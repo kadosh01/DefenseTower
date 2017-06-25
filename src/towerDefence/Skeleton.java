@@ -21,7 +21,6 @@ public class Skeleton extends Creep{
 
 	@Override
 	public void tickHAppend(Tickable t) {
-		//System.out.println("guli life: "+life);
 		Cell curr= location;
 		counter++;
 		Cell[][] board= this.board;
@@ -32,20 +31,14 @@ public class Skeleton extends Creep{
 			im=m[counter%m.length];
 			if(counter%(1000/Game.delay)==0){
 				location = board[curr._x+curr.next_x][curr._y+curr.next_y];
-				//x=location._x*5;
-				//y=location._y*5;
-				
-				
 			}
-		}
-		
-		
-		
+		}		
 	}
 
 	@Override
 	public void accept(Visitor v) {
-		// TODO Auto-generated method stub
+		System.out.println("accepted");
+		v.visit(this);
 		
 	}
 

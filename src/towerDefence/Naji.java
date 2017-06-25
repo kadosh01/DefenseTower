@@ -7,6 +7,8 @@ import javax.imageio.ImageIO;
 
 public class Naji extends Creep{
 	//private final String[] path;
+	protected double poison;
+	protected double poisonTime;
 	
 	public Naji(int x,int y, Cell cell, Cell[][] board) throws IOException{
 		super(cell, board);
@@ -19,7 +21,18 @@ public class Naji extends Creep{
 
 	@Override
 	public void tickHAppend(Tickable t) {
-		// TODO Auto-generated method stub
+		Cell curr= location;
+		counter++;
+		Cell[][] board= this.board;
+		if(curr._x+curr.next_x<board.length & curr._y+curr.next_y<board.length){
+			x = x + location.next_x;
+			y = y + location.next_y;
+			im=m[counter%m.length];
+			if(counter%(1000/Game.delay)==0){
+				location = board[curr._x+curr.next_x][curr._y+curr.next_y];
+				poisonTime--;
+			}
+		}	
 		
 	}
 
