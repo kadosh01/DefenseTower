@@ -3,7 +3,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 public class DinoTower extends Tower{
-	private final String[] path={"/Tower/Dino/Layer 1.png","/Tower/Dino/Layer 2.png","/Tower/Dino/Layer 3.png","/Tower/Dino/Layer 4.png","/Tower/Dino/Layer 5.png","/Tower/Dino/Layer 6.png","/Tower/Dino/Layer 7.png"};
+	private final String[] path={"/Tower/Dino/Layer 1.png","/Tower/Dino/Layer 2.png","/Tower/Dino/Layer 3.png","/Tower/Dino/Layer 4.png","/Tower/Dino/Layer 5.png"};
 	public DinoTower(int x, int y) throws IOException {
 		super(x, y);
 		this.hitArea=1;
@@ -11,13 +11,15 @@ public class DinoTower extends Tower{
 		for(int i=0;i<m.length;i++)
 			m[i]=ImageIO.read(getClass().getResourceAsStream(path[i]));
 		im=m[0];
+		this.Hsize=50;
+		this.size=25;
 	}
 	@Override
-	public void tickHAppend(int count) {
+	public void tickHAppend(Tickable t) {
 		// TODO Auto-generated method stub
 		
 	}
-	
+	@Override
 	public void visit(Knight k) {
 		// TODO Auto-generated method stub
 		
@@ -37,4 +39,5 @@ public class DinoTower extends Tower{
 		// TODO Auto-generated method stub
 		
 	}
+	
 }
