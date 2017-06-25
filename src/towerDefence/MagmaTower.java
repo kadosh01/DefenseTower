@@ -13,6 +13,8 @@ public class MagmaTower extends Tower {
 		for(int i=0;i<m.length;i++)
 			m[i]=ImageIO.read(getClass().getResourceAsStream(path[i]));
 		im=m[0];
+		this.Hsize=50;
+		this.size=25;
 	}
 	
 	@Override

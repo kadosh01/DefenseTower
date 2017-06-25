@@ -11,8 +11,8 @@ public abstract class Tower implements Tickable, Visitor{
 	public Cell location;
 	public double speed;
 	protected Cell[][] board;
-	public static final int size=25;
-	public static final int Hsize=75;
+	protected int size;
+	protected int Hsize;
 	public Image[] m;
 	public Image im;
 	public int counter;

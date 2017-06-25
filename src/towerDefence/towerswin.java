@@ -1,5 +1,6 @@
 package towerDefence;
 
+import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
@@ -19,27 +20,26 @@ import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.LayoutStyle;
+import javax.swing.SpringLayout;
 import javax.swing.SwingUtilities;
-
-
 public class towerswin extends JFrame{
 	private int x;
 	private int y;
 	private JFrame a=(JFrame)SwingUtilities.windowForComponent(this);
-	private final int imghigh=85;
-	private final int imgwidh=43;
-	private final int width=imgwidh*3;
+	private final int imghigh=105;
+	private final int imgwidh=50;
+	private final int width=imgwidh*8;
 	private final int high=imghigh*3;
 	
 	public towerswin(int x,int y,Game parent){
-		GridLayout grid=new GridLayout(5, 3);		
-		JPanel m=new JPanel(grid);
+		GridLayout grid=new GridLayout(2, 3);		
+		JPanel m=new JPanel(null);
 		setContentPane(m);
 		this.x=x;
 		this.y=y;
-		setLayout(new GridLayout(2, 3));
+		//GridLayout(2, 4)
+		setLayout(grid);
 		setBackground(Color.DARK_GRAY);
-	
 		
 		setBounds(y+100, x,width, high);
 		System.out.println("x: "+x+" y: "+y);
@@ -147,6 +147,82 @@ public class towerswin extends JFrame{
 		});
 		m.add(Magma);
 		Magma.setVisible(true);
+		
+		JButton Sam=new JButton("");
+		Sam.setBackground(null);
+		Sam.setBounds(20+imgwidh, 105, imgwidh, imghigh);
+		
+		Sam.setIcon(new ImageIcon(this.getClass().getResource("/tower5.png")));
+		Sam.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+					Game.settower=new SamTower(0,0);
+					//parent.addTower(new PosionTower(x-Tower.size-10,y));
+					//System.out.println("x: "+x+" y: "+y);
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				setVisible(false);
+				
+				
+			}
+		});
+		m.add(Sam);
+		Sam.setVisible(true);
+		
+		JButton Goko=new JButton("");
+		Goko.setBackground(null);
+		Goko.setBounds(20+imgwidh, 105, imgwidh, imghigh);
+		
+		Goko.setIcon(new ImageIcon(this.getClass().getResource("/tower6.png")));
+		Goko.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+					Game.settower=new GokoTower(0,0);
+					//parent.addTower(new PosionTower(x-Tower.size-10,y));
+					//System.out.println("x: "+x+" y: "+y);
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				setVisible(false);
+				
+				
+			}
+		});
+		m.add(Goko);
+		Goko.setVisible(true);
+		
+		JButton Dino=new JButton("");
+		Dino.setBackground(null);
+		Dino.setBounds(20+imgwidh, 105, imgwidh, imghigh);
+		
+		Dino.setIcon(new ImageIcon(this.getClass().getResource("/tower7.png")));
+		Dino.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+					Game.settower=new DinoTower(0,0);
+					//parent.addTower(new PosionTower(x-Tower.size-10,y));
+					//System.out.println("x: "+x+" y: "+y);
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				setVisible(false);
+				
+				
+			}
+		});
+		m.add(Dino);
+		Dino.setVisible(true);
+	
 	
 	}
 	
