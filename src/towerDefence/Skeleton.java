@@ -20,7 +20,8 @@ public class Skeleton extends Creep{
 	}
 
 	@Override
-	public void tickHAppend(int count) {
+	public void tickHAppend(Tickable t) {
+		//System.out.println("guli life: "+life);
 		Cell curr= location;
 		counter++;
 		Cell[][] board= this.board;

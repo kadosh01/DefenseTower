@@ -20,7 +20,8 @@ public class Knight extends Creep{
 			m[i]=ImageIO.read(getClass().getResourceAsStream(path[i]));
 		
 	}
-	public void tickHAppend(int count) {
+	@Override
+	public void tickHAppend(Tickable t) {
 		Cell curr= location;
 		counter++;
 		Cell[][] board= this.board;
@@ -30,10 +31,6 @@ public class Knight extends Creep{
 			im=m[counter%m.length];
 			if(counter%(1000/Game.delay)==0){
 				location = board[curr._x+curr.next_x][curr._y+curr.next_y];
-				//x=location._x*5;
-				//y=location._y*5;
-				
-				
 			}
 		}
 		
@@ -41,7 +38,7 @@ public class Knight extends Creep{
 	}
 	@Override
 	public void accept(Visitor v) {
-		// TODO Auto-generated method stub
+		v.visit(this);
 		
 	}
 

@@ -47,8 +47,8 @@ public class Game extends JPanel implements ActionListener , MouseListener,Mouse
 	public static final int creepsize=Creep.size;
 	private int creep;
 	private int count;
-	private LinkedList<Creep> wave;
-	private LinkedList<Creep> creeps;
+	private LinkedList<Creep> wave; // creeps on board
+	private LinkedList<Creep> creeps; // 
 	private LinkedList<Tower> Towers;
 	public JLabel life;
 	public JFrame topFrame ;
@@ -120,7 +120,7 @@ public class Game extends JPanel implements ActionListener , MouseListener,Mouse
 
 		wave = new LinkedList<Creep>();
 		this.Towers=new LinkedList<>();
-		creeps = game.wave(2);
+		creeps = game.wave(1);
 
 	}
 
@@ -189,6 +189,7 @@ public class Game extends JPanel implements ActionListener , MouseListener,Mouse
 public void addTower(Tower t){
 	Towers.add(t);
 } 
+
 @Override
 public void actionPerformed(ActionEvent e) {
 	try{
@@ -209,33 +210,33 @@ public void actionPerformed(ActionEvent e) {
 			int numOfCreeps = wave.size();
 			for(int i=0; i<numOfCreeps; i++){
 				Creep k = wave.get(i);
-				//System.out.println(i);
-				//System.out.println(k.x+"  "+k.y);
-				k.tickHAppend(count);
-				//System.out.println(k.x+"  "+k.y);
+				k.tickHAppend(null);
 				if((k.location==end)){
 					wave.remove(k);
 					game.life--;
 				}
+				for(int j=0; j<Towers.size(); j++){
+					Tower t = Towers.get(j);
+					t.tickHAppend(k);
+				}
+				
 				life.setText("HP: "+game.life);
 				repaint();
 			}
-			for(int i=0; i<Towers.size(); i++){
-				Tower t = Towers.get(i);
-				//System.out.println(i);
-				//System.out.println(k.x+"  "+k.y);
-				t.tickHAppend(count);
-			}
+			
 			count++;
 			repaint();
-			double entercreep=Math.random();
-			if(entercreep<0.02){
-				if(!creeps.isEmpty()){
+			if(!creeps.isEmpty()){
+				double entercreep=Math.random();
+				if(entercreep<0.02){					
 					Creep c = creeps.get(0);
 					creeps.removeFirst();
 					wave.add(c);
 					c.counter = 0;
 				}					
+			}
+			if(wave.isEmpty()){
+				startBtn.setText("Next Wave");
 			}
 		}
 
@@ -262,16 +263,11 @@ public void mouseClicked(MouseEvent e) {
 			settower=null;
 		}
 	}
-	System.out.println("click  "+x+ "  y: "+y);
-	System.out.println(("road: "+board[(x*28)/HIGH][(y*28)/HIGH].isRoad()));
 	repaint();
 }
 
 @Override
 public void mousePressed(MouseEvent e) {
-
-
-
 
 }
 
@@ -304,11 +300,6 @@ public void mouseMoved(MouseEvent e) {
 	int x = (e.getX()/size)*size;
 	int y = (e.getY()/size)*size;
 	this.erea=new Point(x, y);
-	System.out.println("move  "+x+ "  y: "+y);
-	System.out.println(board.length +"  "+board[0].length);
-
-
-
 	repaint();
 
 

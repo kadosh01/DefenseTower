@@ -1,4 +1,5 @@
 package towerDefence;
+
 import java.awt.Image;
 import java.io.IOException;
 
@@ -6,6 +7,7 @@ import javax.imageio.ImageIO;
 
 public class PosionTower extends Tower{
 	private final String[] path={"/Tower/Posion/Layer 1.png","/Tower/Posion/Layer 2.png","/Tower/Posion/Layer 3.png","/Tower/Posion/Layer 4.png","/Tower/Posion/Layer 5.png","/Tower/Posion/Layer 6.png","/Tower/Posion/Layer 7.png","/Tower/Posion/Layer 8.png","/Tower/Posion/Layer 9.png"};
+	
 	
 	public PosionTower(int x, int y) throws IOException {
 		super(x, y);
@@ -17,7 +19,18 @@ public class PosionTower extends Tower{
 	}
 	
 	@Override
-	public void tickHAppend(int count) {
+	public void tickHAppend(Tickable t) {
+		Creep c = (Creep)t;
+		int creepx = c.x;
+		int creepy = c.y;
+		System.out.println("tower: "+x+"  "+y);
+		System.out.println("creep: "+c.x+" "+c.y);
+		System.out.println((creepx>=x-hitArea*Game.size & creepx<=x+hitArea*Game.size));
+		System.out.println((creepy>=y-hitArea*Game.size & creepy<=y+hitArea*Game.size));
+		
+		if((creepx>=x-hitArea*Game.size & creepx<=x+hitArea*Game.size) | (creepy>=y-hitArea*Game.size & creepy<=y+hitArea*Game.size)){
+			
+		}
 		counter++;
 		im=m[counter%m.length];
 		
@@ -31,8 +44,8 @@ public class PosionTower extends Tower{
 
 	@Override
 	public void visit(Skeleton s) {
-		// TODO Auto-generated method stub
-		
+		s.life = s.life-20;
+		s.im = null;
 	}
 
 	@Override
@@ -47,4 +60,5 @@ public class PosionTower extends Tower{
 		
 	}
 
+	
 }

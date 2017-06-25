@@ -15,8 +15,9 @@ public class MagmaTower extends Tower {
 		im=m[0];
 	}
 	@Override
-	public void tickHAppend(int count) {
-		// TODO Auto-generated method stub
+	public void tickHAppend(Tickable t) {
+		counter++;
+		im=m[counter%m.length];
 		
 	}
 	@Override

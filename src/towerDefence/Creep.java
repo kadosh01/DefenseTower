@@ -22,7 +22,9 @@ public abstract class Creep implements Tickable, Visited{
 		this.board = board;
 	}
 	
-	
+	public void hit(Tower t){
+		this.accept(t);
+	}
 
 
 }

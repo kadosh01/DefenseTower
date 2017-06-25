@@ -18,7 +18,7 @@ public class Mike extends Creep{
 	}
 
 	@Override
-	public void tickHAppend(int count) {
+	public void tickHAppend(Tickable t) {
 		// TODO Auto-generated method stub
 		
 	}

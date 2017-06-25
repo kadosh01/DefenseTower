@@ -22,10 +22,6 @@ import javax.swing.LayoutStyle;
 import javax.swing.SwingUtilities;
 
 
-
-
-
-
 public class towerswin extends JFrame{
 	private int x;
 	private int y;

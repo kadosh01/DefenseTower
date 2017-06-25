@@ -1,4 +1,5 @@
 package towerDefence;
+
 import java.awt.Image;
 import java.io.IOException;
 
@@ -17,7 +18,7 @@ public class ArrowTower extends Tower{
 	}
 
 	@Override
-	public void tickHAppend(int count) {
+	public void tickHAppend(Tickable t) {
 		// TODO Auto-generated method stub
 		
 	}
