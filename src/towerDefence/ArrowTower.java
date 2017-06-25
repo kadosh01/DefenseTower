@@ -1,5 +1,4 @@
 package towerDefence;
-
 import java.awt.Image;
 import java.io.IOException;
 
@@ -16,11 +15,10 @@ public class ArrowTower extends Tower{
 			m[i]=ImageIO.read(getClass().getResourceAsStream(path[i]));
 		im=m[0];
 	}
-	
+
 	@Override
 	public void tickHAppend(int count) {
-		counter++;
-		im=m[counter%m.length];
+		// TODO Auto-generated method stub
 		
 	}
 
@@ -47,8 +45,5 @@ public class ArrowTower extends Tower{
 		// TODO Auto-generated method stub
 		
 	}
-
-	
-	
 
 }

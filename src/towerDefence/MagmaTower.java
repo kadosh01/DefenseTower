@@ -1,3 +1,4 @@
+package towerDefence;
 import java.awt.Image;
 import java.io.IOException;
 
@@ -12,5 +13,30 @@ public class MagmaTower extends Tower {
 		for(int i=0;i<m.length;i++)
 			m[i]=ImageIO.read(getClass().getResourceAsStream(path[i]));
 		im=m[0];
+	}
+	@Override
+	public void tickHAppend(int count) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void visit(Knight k) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void visit(Skeleton s) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void visit(Mike m) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void visit(Naji n) {
+		// TODO Auto-generated method stub
+		
 	}
 }
