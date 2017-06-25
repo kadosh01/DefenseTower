@@ -38,7 +38,7 @@ public class PosionTower extends Tower{
 
 	@Override
 	public void visit(Knight k) {
-		// TODO Auto-generated method stub
+		
 		
 	}
 
