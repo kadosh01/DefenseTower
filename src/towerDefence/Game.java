@@ -56,6 +56,7 @@ public class Game extends JPanel implements ActionListener , MouseListener,Mouse
 	private Point erea;
 	public Image move;
 	public Image overly;
+	private boolean gamestart=false;
 	public static Tower settower;
 	public static final int HIGH=size*28;
 	/**
@@ -173,18 +174,36 @@ public class Game extends JPanel implements ActionListener , MouseListener,Mouse
 			}
 			offGr.drawImage(move, erea.x, erea.y-Tower.size ,Tower.size,Tower.size*2,this);
 		}
-	g.drawImage(offIm, 0, 0, this);
+		/*
+		//pointers 
+	//start pointer
+		try {
+			BufferedImage[] E={ImageIO.read(getClass().getResourceAsStream("/Enter/Layer 1.png")),ImageIO.read(getClass().getResourceAsStream("/Enter/Layer 2.png"))};
+			BufferedImage Ex1[]={ImageIO.read(getClass().getResourceAsStream("/Exit/Layer 1.png")),ImageIO.read(getClass().getResourceAsStream("/Exit/Layer 2.png"))};
+			//if(count%6==0){
+				offGr.drawImage(E[count%E.length], start._y*size, start._x*(size-1),28,47,null);
+				offGr.drawImage(Ex1[count%Ex1.length], end._y, end._x,28,47,null);
+			//}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		*/
+		
+		
+		
 	// grid
-
+	if(gamestart==false){
 	for(int i=0;i<Game.HIGH/size;i++){
-		g.setColor(Color.BLACK);
-		g.drawLine(i*size, 0, i*size,Game.HIGH);
+		offGr.setColor(Color.BLACK);
+		offGr.drawLine(i*size, 0, i*size,Game.HIGH);
 		for(int j=0;j<Game.HIGH/size;j++){
-			g.setColor(Color.BLACK);
-			g.drawLine(0, j*size, Game.HIGH, j*size);
+			offGr.setColor(Color.BLACK);
+			offGr.drawLine(0, j*size, Game.HIGH, j*size);
 		}
 	}
-
+	}
+	g.drawImage(offIm, 0, 0, this);
 }
 public void addTower(Tower t){
 	Towers.add(t);
@@ -201,6 +220,7 @@ public void actionPerformed(ActionEvent e) {
 				timer.start();
 				count=1;
 				creep=0;
+				gamestart=true;
 			}
 
 		}			
@@ -209,10 +229,9 @@ public void actionPerformed(ActionEvent e) {
 			int numOfCreeps = wave.size();
 			for(int i=0; i<numOfCreeps; i++){
 				Creep k = wave.get(i);
-				//System.out.println(i);
-				//System.out.println(k.x+"  "+k.y);
 				k.tickHAppend(count);
-				//System.out.println(k.x+"  "+k.y);
+				
+				
 				if((k.location==end)){
 					wave.remove(k);
 					game.life--;
