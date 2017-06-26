@@ -35,7 +35,7 @@ public class Levels extends JPanel implements ActionListener{
 		setLayout(null);
 		level1 = new JButton("");
 		
-		
+		level1.setBorderPainted(false);
 		level1.setBounds(350, 55, 289, 59);
 		add(level1);
 		level1.setIcon(new ImageIcon(this.getClass().getResource("/level1.png")));
@@ -63,13 +63,13 @@ public class Levels extends JPanel implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		//if(e.getSource().equals(level1)){
+		if(e.getSource().equals(level1)){
 			setVisible(false);
 			JFrame topFrame = (JFrame) SwingUtilities.windowForComponent(this);
 			
 			try {
-				gamewin frame =new gamewin();
-				frame.setVisible(true);
+				//gamewin frame =new gamewin();
+				//frame.setVisible(true);
 				topFrame.setVisible(false);
 				
 				
@@ -83,4 +83,5 @@ public class Levels extends JPanel implements ActionListener{
 		
 	}
 
-//}
+
+}
