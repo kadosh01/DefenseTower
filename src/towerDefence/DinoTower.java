@@ -1,6 +1,7 @@
 package towerDefence;import java.awt.Image;
 
 import java.io.IOException;
+import java.util.LinkedList;
 
 import javax.imageio.ImageIO;
 
@@ -20,7 +21,7 @@ public class DinoTower extends Tower{
 		this.size=25;
 	}
 	@Override
-	public void tickHAppend(Tickable t) {
+	public void tickHAppend(LinkedList<Tickable> creeps) {
 		// TODO Auto-generated method stub
 		
 	}

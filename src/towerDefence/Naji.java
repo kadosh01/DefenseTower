@@ -2,6 +2,7 @@ package towerDefence;
 
 import java.awt.Image;
 import java.io.IOException;
+import java.util.LinkedList;
 
 import javax.imageio.ImageIO;
 
@@ -20,7 +21,7 @@ public class Naji extends Creep{
 	}
 
 	@Override
-	public void tickHAppend(Tickable t) {
+	public void tickHAppend(LinkedList<Tickable> towers) {
 		Cell curr= location;
 		counter++;
 		Cell[][] board= this.board;

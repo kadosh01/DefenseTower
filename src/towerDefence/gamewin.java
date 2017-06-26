@@ -18,7 +18,7 @@ public class gamewin extends JFrame {
 		mainPane.setOpaque(false);
 		Game board= new Game(0, buttonPane);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setBounds(250, 0, 1000, Game.HIGH+Game.size);
+		this.setBounds(250, 0, 1000, 800);
 		mainPane.setLayout(null);
 		mainPane.setBounds(0, 0, 1000,Game.HIGH+Game.size);
 		this.setContentPane(mainPane);

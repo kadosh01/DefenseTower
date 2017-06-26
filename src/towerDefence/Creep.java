@@ -5,8 +5,8 @@ import java.awt.Image;
 
 public abstract class Creep implements Tickable, Visited{
 
-	public int x; // location in pixels
-	public int y; //
+	public int x; // 
+	public int y; // location in pixels
 	public Cell location;
 	public double speed;
 	public int life;
@@ -15,11 +15,16 @@ public abstract class Creep implements Tickable, Visited{
 	public Image[] m;
 	public Image im;
 	public int counter;
+	public int slowTime;// Sam Tower
+	public int gokuHit;// 
+	public int H;      //
+	public int K;      // Goku Tower
 	
 	public Creep(Cell first, Cell[][] board){
 		this.life=100;
 		location= first;
 		this.board = board;
+		this.slowTime = 0;
 	}
 	
 	public void hit(Tower t){

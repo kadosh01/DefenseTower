@@ -27,8 +27,8 @@ public class Board {
 			
 	}
 	
-	public LinkedList<Creep> wave(int num) throws IOException{
-		LinkedList<Creep> creeps = new LinkedList<Creep>();
+	public LinkedList<Tickable> wave(int num) throws IOException{
+		LinkedList<Tickable> creeps = new LinkedList<Tickable>();
 		int amount;
 		switch(num){
 		case 1:

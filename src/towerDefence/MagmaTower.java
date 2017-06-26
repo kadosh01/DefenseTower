@@ -1,11 +1,14 @@
 package towerDefence;
 import java.awt.Image;
 import java.io.IOException;
+import java.util.LinkedList;
 
 import javax.imageio.ImageIO;
 
 public class MagmaTower extends Tower {
+	
 	private final String[] path={"/Tower/Magma/Layer 1.png","/Tower/Magma/Layer 2.png","/Tower/Magma/Layer 3.png","/Tower/Magma/Layer 4.png","/Tower/Magma/Layer 5.png","/Tower/Magma/Layer 6.png","/Tower/Magma/Layer 7.png"};
+	
 	public MagmaTower(int x, int y) throws IOException {
 		super(x, y);
 		this.hitArea=1;
@@ -15,28 +18,30 @@ public class MagmaTower extends Tower {
 		im=m[0];
 		this.Hsize=50;
 		this.size=25;
+		this.speed = 1;
 	}
 	
 	@Override
-	public void tickHAppend(Tickable t) {
-		Creep c = (Creep)t;
-		int creepx = c.y;
-		int creepy = c.x;
-		int towerx = y;
-		int towery = x;
-		System.out.println(c+" life: "+c.life);
-		//System.out.println(c+"  "+c.x+"  "+c.y);
-	
-		if(creepx>=towerx-hitArea*Game.size & creepx<=towerx+Game.size+Game.size*hitArea && creepy>=towery-Game.size-Game.size*hitArea & creepy<=towery+hitArea*Game.size){
-			if(counter%(1000/Game.delay)==0)
-				c.hit(this);
-			System.out.println("hit");
+	public void tickHAppend(LinkedList<Tickable> creeps) {
+		if(counter%(1000/Game.delay)==0){
+			for(int i=0; i<creeps.size(); i++){
+				Creep c = (Creep)creeps.get(i);
+				int creepx = c.y;
+				int creepy = c.x;
+				int towerx = y;
+				int towery = x;
+				if(creepx>=towerx-hitArea*Game.size & creepx<=towerx+Game.size+Game.size*hitArea && creepy>=towery-Game.size-Game.size*hitArea & creepy<=towery+hitArea*Game.size){
+					c.hit(this);
+					System.out.println("hit");
+				}
+			}
+				
 		}
-		
+				
 		counter++;
-		im=m[counter%m.length];
-		
+		im=m[counter%m.length];		
 	}
+	
 	@Override
 	public void visit(Knight k) {
 		if(k.poisonTime>0)

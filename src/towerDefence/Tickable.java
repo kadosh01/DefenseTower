@@ -1,9 +1,10 @@
 package towerDefence;
 
 import java.awt.Graphics;
+import java.util.LinkedList;
 
 public interface Tickable {
 	
-	public void tickHAppend(Tickable t);
+	public void tickHAppend(LinkedList<Tickable> creeps);
 
 }

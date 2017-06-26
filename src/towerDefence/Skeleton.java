@@ -2,6 +2,7 @@ package towerDefence;
 
 import java.awt.Image;
 import java.io.IOException;
+import java.util.LinkedList;
 
 import javax.imageio.ImageIO;
 
@@ -20,7 +21,7 @@ public class Skeleton extends Creep{
 	}
 
 	@Override
-	public void tickHAppend(Tickable t) {
+	public void tickHAppend(LinkedList<Tickable> towers) {
 		Cell curr= location;
 		counter++;
 		Cell[][] board= this.board;
@@ -28,9 +29,12 @@ public class Skeleton extends Creep{
 			x = x + location.next_x;
 			y = y + location.next_y;
 			if(counter%2==0)
-			im=m[counter%m.length];
+				im=m[counter%m.length];
+			if(slowTime<=0)
+				speed = 1;
 			if(counter%(1000/Game.delay)==0){
 				location = board[curr._x+curr.next_x][curr._y+curr.next_y];
+				slowTime= slowTime-2;
 			}
 		}		
 	}
