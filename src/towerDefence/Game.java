@@ -70,6 +70,13 @@ public class Game extends JPanel implements ActionListener , MouseListener,Mouse
 	private JLabel time;
 	private boolean puse=false;
 	private Tower te=null;
+	public static int arrow=3;
+	public static int poison=3;
+	public static int lava=3;
+	public static int magic=3;
+	public static int dino=1;
+	public static int sam=1;
+	public static int goku=1;
 	/**
 	 * Create the panel.
 	 * @throws IOException 
@@ -353,17 +360,22 @@ public void mouseClicked(MouseEvent e) {
 	
 	if(settower==null){
 		for(int i=0;i<Towers.size();i++){
-		Tower t=(Tower)Towers.get(i);
-		System.out.println("ty: "+t.y+"tx : "+t.x);
-		System.out.println("x "+erea.x+"y "+erea.y);
-		if((t.x==erea.y & t.y==erea.x)){
-			towerpresent=true;
-			te=t;
-		}
+			Tower t=(Tower)Towers.get(i);
+			if((t.x==erea.y & t.y==erea.x)){
+				towerpresent=true;
+				te=t;
+			}
 		}
 		if(!towerpresent){
-		towerswin win=new towerswin(erea.y, erea.x,this);
-		win.setVisible(true);
+			towerswin win=new towerswin(erea.y, erea.x,this);
+			win.setVisible(true);
+			win.Arrowlabel.setText(""+arrow);
+			win.Poisonlabel.setText(""+poison);
+			win.MagicLabel.setText(""+magic);
+			win.MagmaLabel.setText(""+lava);
+			win.DinoLabel.setText(""+dino);
+			win.GokuLabel.setText(""+goku);
+			win.SamLabel.setText(""+sam);
 			}
 		else{
 			JFrame f=new JFrame();
