@@ -36,6 +36,7 @@ public class MagicTower extends Tower{
 	
 		if(c!=null && counter%(1000/Game.delay)==0){
 			c.hit(this);
+			System.out.println(c.life);
 			System.out.println("hit");
 		}		
 		counter++;

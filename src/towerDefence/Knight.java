@@ -32,9 +32,11 @@ public class Knight extends Creep{
 		Cell[][] board= this.board;
 		
 		if(curr._x+curr.next_x<board.length & curr._y+curr.next_y<board.length){
-			x = (int)(x + location.next_x*speed);
-			y = (int)(y + location.next_y*speed);
+			x = (int)(x + location.next_x);
+			y = (int)(y + location.next_y);
 			im=m[counter%m.length];
+			if(slowTime<=0)
+				speed = 1;
 			if(counter%(Game.size)==0){
 				location = board[curr._x+curr.next_x][curr._y+curr.next_y];
 				poisonTime--;

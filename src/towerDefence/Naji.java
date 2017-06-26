@@ -32,10 +32,13 @@ public class Naji extends Creep{
 			x = x + location.next_x;
 			y = y + location.next_y;
 			im=m[counter%m.length];
-			//System.out.println("qead"+counter);	
+			//System.out.println("qead"+counter);
+			if(slowTime<=0)
+				speed = 2;
 			if(counter%Game.size==0){
 				location = board[curr._x+curr.next_x][curr._y+curr.next_y];
 				poisonTime--;
+				slowTime = slowTime-2;
 			}
 		}	
 		
