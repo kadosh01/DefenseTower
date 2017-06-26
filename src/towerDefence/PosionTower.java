@@ -27,14 +27,15 @@ public class PosionTower extends Tower{
 		Creep c = (Creep)t;
 		int creepx = c.y;
 		int creepy = c.x;
-		int tx=y;
-		int ty=x;
-		if((creepy>=(ty-Game.size)-(Game.size*hitArea)) & creepy<=(ty+(Game.size*hitArea)) )
-			if(creepx>=(tx-(Game.size*hitArea)) & creepx<=tx+(Game.size*hitArea))
-					System.out.println("adsasdasd");
-			//if(counter%(1000/Game.delay)==0)
-			//	c.hit(this);
-			//System.out.println("hit");
+		int towerx = y;
+		int towery = x;
+		System.out.println(c+" life: "+c.life);		
+	
+		if(creepx>=towerx-hitArea*Game.size & creepx<=towerx+Game.size+Game.size*hitArea && creepy>=towery-Game.size-Game.size*hitArea & creepy<=towery+hitArea*Game.size){
+			if(counter%(1000/Game.delay)==0)
+				c.hit(this);
+			System.out.println("hit");
+		}
 		
 		counter++;
 		im=m[counter%m.length];

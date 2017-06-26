@@ -12,7 +12,7 @@ public class Naji extends Creep{
 	
 	public Naji(int x,int y, Cell cell, Cell[][] board) throws IOException{
 		super(cell, board);
-		this.speed=1;
+		this.speed=2;
 		this.x=x;
 		this.y=y;
 		//this.im=new Image[2];

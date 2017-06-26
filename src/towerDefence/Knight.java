@@ -14,7 +14,7 @@ public class Knight extends Creep{
 	
 	public Knight(int x,int y, Cell cell, Cell[][] board) throws IOException{
 		super(cell, board);
-		this.speed=1;
+		this.speed=2;
 		this.x=x;
 		this.y=y;
 		this.poison = 1;
@@ -30,10 +30,10 @@ public class Knight extends Creep{
 		counter++;
 		Cell[][] board= this.board;
 		if(curr._x+curr.next_x<board.length & curr._y+curr.next_y<board.length){
-			x = x + location.next_x;
-			y = y + location.next_y;
+			x = (int)(x + location.next_x*speed);
+			y = (int)(y + location.next_y*speed);
 			im=m[counter%m.length];
-			if(counter%(1000/Game.delay)==0){
+			if(counter%(double)((1000/Game.delay)/speed)==0){
 				location = board[curr._x+curr.next_x][curr._y+curr.next_y];
 				poisonTime--;
 			}
