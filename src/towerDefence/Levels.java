@@ -4,28 +4,31 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 import java.awt.Button;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.EventQueue;
+import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 
 import javax.swing.border.EmptyBorder;
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 
 public class Levels extends JPanel implements ActionListener{
 	JButton level1;
 	JButton level2;
 	JButton level3;
-
+	
 	/**
 	 * Create the panel.
 	 */
 	public Levels() {
 		setLayout(null);
-		
 		level1 = new JButton("level 1");
 		level1.setBounds(103, 222, 210, 178);
 		add(level1);
@@ -38,6 +41,11 @@ public class Levels extends JPanel implements ActionListener{
 		level3 = new JButton("level 3");
 		level3.setBounds(889, 222, 210, 178);
 		add(level3);
+		
+		JLabel bbg=new JLabel(new ImageIcon(this.getClass().getResource("/bglevels.png")));
+		bbg.setBounds(new Rectangle(-14, 11, 1124, 660));
+		bbg.setAlignmentX(Component.CENTER_ALIGNMENT);
+		this.add(bbg);
 
 	}
 
@@ -46,23 +54,11 @@ public class Levels extends JPanel implements ActionListener{
 		//if(e.getSource().equals(level1)){
 			setVisible(false);
 			JFrame topFrame = (JFrame) SwingUtilities.windowForComponent(this);
-			Game board;
+			
 			try {
-				
-				JPanel mainPane= new JPanel();
-				JPanel buttonPane = new JPanel();
-				board = new Game(0, buttonPane);
-				mainPane.setLayout(new BoxLayout(mainPane, BoxLayout.X_AXIS));
-				mainPane.add(board);
-				mainPane.add(buttonPane);
-				board.setPreferredSize(new Dimension(Game.HIGH,Game.HIGH));
-				//board.setBounds(40, 40, 200,200 );
-				
-				//topFrame.addMouseListener(board);
-				//topFrame.addMouseMotionListener(board);
-				board.addMouseListener(board);
-				board.addMouseMotionListener(board);
-				topFrame.setContentPane(mainPane);
+				gamewin frame =new gamewin();
+				frame.setVisible(true);
+				topFrame.setVisible(false);
 				
 				
 			} catch (Exception e1) {

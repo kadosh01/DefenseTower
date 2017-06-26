@@ -16,10 +16,11 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.time.Year;
 import java.util.LinkedList;
 
 import javax.swing.Timer;
-
+import javax.xml.ws.Holder;
 import javax.imageio.ImageIO;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -67,10 +68,10 @@ public class Game extends JPanel implements ActionListener , MouseListener,Mouse
 		super();
 		this.buttonPane = buttonPane;
 		this.g=super.getGraphics();
-		setLayout(null);
-		//setBounds(10, 10, 1700, 1300);
+		buttonPane.setOpaque(false);
+		//setBounds(0, 0, 100, 100);
 		overly = ImageIO.read(getClass().getResourceAsStream("/overly.png"));
-		setPreferredSize( new Dimension( 800, 1600 ) );
+		//setPreferredSize( new Dimension( 800, 1600 ) );
 		timer = new Timer(delay, this);
 		startBtn = new JButton("start");
 		buttonPane.add(startBtn);
@@ -121,7 +122,7 @@ public class Game extends JPanel implements ActionListener , MouseListener,Mouse
 
 		wave = new LinkedList<Creep>();
 		this.Towers=new LinkedList<>();
-		creeps = game.wave(2);
+		creeps = game.wave(1);
 
 	}
 

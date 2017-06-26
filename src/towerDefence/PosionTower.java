@@ -25,16 +25,17 @@ public class PosionTower extends Tower{
 	@Override
 	public void tickHAppend(Tickable t) {
 		Creep c = (Creep)t;
-		int creepx = c.x;
-		int creepy = c.y;
-		//System.out.println(c+" life: "+c.life);
-		System.out.println("tower: "+x+"  "+y);
-		System.out.println(c+"  "+creepx+"  "+creepy);
-		if((creepx>=(x/Game.size)-hitArea*Game.size & creepx<=(x/Game.size)*Game.size+hitArea*Game.size) & (creepy>=(y/Game.size)-hitArea*Game.size & creepy<=(y/Game.size)*Game.size+hitArea*Game.size)){
-			if(counter%(1000/Game.delay)==0)
-				c.hit(this);
-			System.out.println("hit");
-		}
+		int creepx = c.y;
+		int creepy = c.x;
+		int tx=y;
+		int ty=x;
+		if((creepy>=(ty-Game.size)-(Game.size*hitArea)) & creepy<=(ty+(Game.size*hitArea)) )
+			if(creepx>=(tx-(Game.size*hitArea)) & creepx<=tx+(Game.size*hitArea))
+					System.out.println("adsasdasd");
+			//if(counter%(1000/Game.delay)==0)
+			//	c.hit(this);
+			//System.out.println("hit");
+		
 		counter++;
 		im=m[counter%m.length];
 		
