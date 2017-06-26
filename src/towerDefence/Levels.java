@@ -68,8 +68,8 @@ public class Levels extends JPanel implements ActionListener{
 			JFrame topFrame = (JFrame) SwingUtilities.windowForComponent(this);
 			
 			try {
-				//gamewin frame =new gamewin();
-				//frame.setVisible(true);
+				gamewin frame =new gamewin();
+				frame.setVisible(true);
 				topFrame.setVisible(false);
 				
 				
