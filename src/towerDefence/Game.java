@@ -31,6 +31,7 @@ import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Font;
 
 public class Game extends JPanel implements ActionListener , MouseListener,MouseMotionListener  {
 
@@ -62,9 +63,13 @@ public class Game extends JPanel implements ActionListener , MouseListener,Mouse
 	public static final int HIGH=size*28;
 	private JButton Bgamespeed;
 	private JButton play;
+	private JButton pause;
+	private JButton go;
 	int sec=0;
 	int min=0;
 	private JLabel time;
+	private boolean puse=false;
+	private Tower te=null;
 	/**
 	 * Create the panel.
 	 * @throws IOException 
@@ -73,6 +78,7 @@ public class Game extends JPanel implements ActionListener , MouseListener,Mouse
 		super();
 		this.buttonPane = buttonPane;
 		this.g=super.getGraphics();
+		buttonPane.setLayout(new BoxLayout(buttonPane, BoxLayout.Y_AXIS));
 		buttonPane.setOpaque(false);
 		//setBounds(0, 0, 100, 100);
 		overly = ImageIO.read(getClass().getResourceAsStream("/overly.png"));
@@ -81,17 +87,25 @@ public class Game extends JPanel implements ActionListener , MouseListener,Mouse
 		startBtn = new JButton("start");
 		this.Bgamespeed = new JButton("Fastforwad");
 		this.play = new JButton("Play");
+		this.pause = new JButton("Pause");
+		this.go = new JButton("Go");
 		Bgamespeed.setVisible(true);
+		pause.setVisible(true);
+		go.setVisible(false);
 		buttonPane.add(startBtn);
 		buttonPane.add(Bgamespeed);
 		buttonPane.add(play);
+		buttonPane.add(pause);
+		buttonPane.add(go);
 		play.setVisible(false);
 		startBtn.setBounds(478, 528, 301, 59);
 		time=new JLabel("min:"+min+" sec :"+sec);
-		buttonPane.setBounds(0, 200, 200, 600);
+		buttonPane.setBounds(0, 200, 200, 900);
 		Bgamespeed.addActionListener(this);
 		play.addActionListener(this);
+		pause.addActionListener(this);
 		startBtn.addActionListener(this);
+		go.addActionListener(this);
 		time.setVisible(true);
 		this.buttonPane.add(time);
 
@@ -109,7 +123,8 @@ public class Game extends JPanel implements ActionListener , MouseListener,Mouse
 		}
 
 		life=new JLabel(("HP: "+game.life));
-		life.setBounds(100, 100, 100, 200);
+		life.setFont(new Font("Tahoma", Font.BOLD, 15));
+		life.setBounds(0, 0, 100, 200);
 		buttonPane.add(life);
 		//load pics
 		map=new BufferedImage[board.length][board[0].length];
@@ -239,6 +254,22 @@ public void actionPerformed(ActionEvent e) {
 			Bgamespeed.setVisible(false);
 			play.setVisible(true);
 		}
+		if(e.getSource().equals(pause)){
+			this.timer.stop();
+			pause.setVisible(false);
+			go.setVisible(true);
+			gamestart=false;
+			puse=true;
+			repaint();
+		}
+		if(e.getSource().equals(go)){
+			this.timer.start();
+			pause.setVisible(true);
+			go.setVisible(false);
+			gamestart=true;
+			puse=false;
+			repaint();
+		}
 		if(e.getSource().equals(play)){
 			Game.delay=Game.delay*Game.gamespeed;
 			Game.gamespeed-=2;
@@ -252,10 +283,13 @@ public void actionPerformed(ActionEvent e) {
 				creeps.removeFirst();
 				wave.add(c);
 				c.counter = 0;
-				timer.start();
+				
 				count=1;
 				creep=0;
-				gamestart=true;
+				if(!puse){
+					timer.start();
+					gamestart=true;
+				}
 			}
 
 		}			
@@ -315,9 +349,60 @@ public void mouseClicked(MouseEvent e) {
 	topFrame = (JFrame) SwingUtilities.windowForComponent(this);
 	int y=(erea.x*28)/HIGH;
 	int x=(erea.y*28)/HIGH;
+	boolean towerpresent=false;
+	
 	if(settower==null){
+		for(int i=0;i<Towers.size();i++){
+		Tower t=(Tower)Towers.get(i);
+		System.out.println("ty: "+t.y+"tx : "+t.x);
+		System.out.println("x "+erea.x+"y "+erea.y);
+		if((t.x==erea.y & t.y==erea.x)){
+			towerpresent=true;
+			te=t;
+		}
+		}
+		if(!towerpresent){
 		towerswin win=new towerswin(erea.y, erea.x,this);
 		win.setVisible(true);
+			}
+		else{
+			JFrame f=new JFrame();
+			JButton Y=new JButton("YES");
+			JButton N=new JButton("Nop");
+			JLabel ask=new JLabel("Do you like to remove this tower ? ");
+			Y.setVisible(true);
+			N.setVisible(true);
+			f.setDefaultCloseOperation(f.getDefaultCloseOperation());
+			
+			f.setContentPane(new JPanel());
+			f.setLayout(new FlowLayout());
+			f.setBounds(erea.x+100, erea.y, 250, 100);
+			f.setResizable(false);
+			f.getContentPane().add(ask);
+			f.getContentPane().add(Y);
+			f.getContentPane().add( N);
+			f.setVisible(true);
+			
+			Y.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					Towers.remove(te);
+					f.setVisible(false);
+					repaint();
+					
+				}
+			});
+			
+			N.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					f.setVisible(false);
+					repaint();
+				}
+			});
+		}
 		this.validate();
 	}
 	if(settower!=null){

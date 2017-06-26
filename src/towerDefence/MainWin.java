@@ -19,6 +19,7 @@ import javax.swing.JButton;
 import java.awt.Component;
 import java.awt.Insets;
 import java.awt.Rectangle;
+import java.awt.Font;
 
 public class MainWin extends JFrame implements ActionListener{
 
@@ -91,10 +92,14 @@ public class MainWin extends JFrame implements ActionListener{
 		button.setBorderPainted(false);
 		button.setBounds(583, 337, 295, 63);
 		contentPane.add(button);
+		
+		
 		JLabel bbg=new JLabel(new ImageIcon(this.getClass().getResource("/bg.png")));
-		bbg.setBounds(new Rectangle(-14, 11, 1124, 660));
+		bbg.setBounds(new Rectangle(-35, 36, 1124, 660));
 		bbg.setAlignmentX(Component.CENTER_ALIGNMENT);
 		contentPane.add(bbg);
+		
+		
 		newGame.addActionListener(this);
 	}
 		

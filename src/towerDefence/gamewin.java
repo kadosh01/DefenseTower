@@ -17,6 +17,7 @@ public class gamewin extends JFrame {
 		mainPane.setVisible(true);
 		mainPane.setOpaque(false);
 		Game board= new Game(0, buttonPane);
+		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setBounds(250, 0, 1000, 800);
 		mainPane.setLayout(null);
@@ -25,7 +26,7 @@ public class gamewin extends JFrame {
 		mainPane.add(board);
 		board.setBounds(mainPane.getWidth()/7, 0, Game.HIGH, Game.HIGH);
 		mainPane.add(buttonPane);
-		buttonPane.setBounds(mainPane.getWidth()-150, 100, 100, 100);
+		buttonPane.setBounds(850, 100, 113, 227);
 		//board.setPreferredSize( new Dimension( 800, 1600 ) );
 		//mainPane.setLayout(new BoxLayout(mainPane, BoxLayout.X_AXIS));
 		//mainPane.setForeground(null);
