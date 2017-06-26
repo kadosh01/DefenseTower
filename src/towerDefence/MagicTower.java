@@ -20,14 +20,18 @@ public class MagicTower extends Tower{
 	@Override
 	public void tickHAppend(Tickable t) {
 		Creep c = (Creep)t;
-		int creepx = c.x;
-		int creepy = c.y;
-		System.out.println(c+" life: "+c.life);
-		if((creepx>=(x/Game.size)-hitArea*Game.size & creepx<=(x/Game.size)*Game.size+hitArea*Game.size) & (creepy>=(y/Game.size)-hitArea*Game.size & creepy<=(y/Game.size)*Game.size+hitArea*Game.size)){
+		int creepx = c.y;
+		int creepy = c.x;
+		int towerx = y;
+		int towery = x;
+		System.out.println(c+" life: "+c.life);		
+	
+		if(creepx>=towerx-hitArea*Game.size & creepx<=towerx+Game.size+Game.size*hitArea && creepy>=towery-Game.size-Game.size*hitArea & creepy<=towery+hitArea*Game.size){
 			if(counter%(1000/Game.delay)==0)
 				c.hit(this);
 			System.out.println("hit");
 		}
+		
 		counter++;
 		im=m[counter%m.length];	
 	}

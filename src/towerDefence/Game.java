@@ -36,7 +36,7 @@ public class Game extends JPanel implements ActionListener , MouseListener,Mouse
 	private JPanel buttonPane;
 	private JButton startBtn;
 	public Board game;
-	public Cell[][] board;
+	public static Cell[][] board;
 	private Cell start;
 	private Cell end;
 	private BufferedImage[][] map;
