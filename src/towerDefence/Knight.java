@@ -12,7 +12,6 @@ public class Knight extends Creep{
 	private final String[] path={"/Knight/Layer 1.png","/Knight/Layer 2.png","/Knight/Layer 3.png","/Knight/Layer 4.png","/Knight/Layer 5.png","/Knight/Layer 6.png","/Knight/Layer 7.png","/Knight/Layer 8.png"};
 	protected double poison;
 	protected double poisonTime;
-	private int j=0;
 	
 	public Knight(int x,int y, Cell cell, Cell[][] board) throws IOException{
 		super(cell, board);
@@ -29,7 +28,6 @@ public class Knight extends Creep{
 	@Override
 	public void tickHAppend(LinkedList<Tickable> towers) {
 		Cell curr= location;
-		j++;
 		counter+=1;
 		Cell[][] board= this.board;
 		

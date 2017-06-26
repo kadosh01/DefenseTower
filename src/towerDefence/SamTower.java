@@ -30,9 +30,7 @@ public class SamTower extends Tower{
 			if(creepx>=towerx-hitArea*Game.size & creepx<=towerx+Game.size+Game.size*hitArea && creepy>=towery-Game.size-Game.size*hitArea & creepy<=towery+hitArea*Game.size){
 				c = t;
 			}
-		}
-		//System.out.println(c+" life: "+c.life);		
-	
+		}	
 		if(c!=null && counter%(1000/Game.delay)==0){
 			c.hit(this);
 			System.out.println("hit");

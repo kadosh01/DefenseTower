@@ -138,7 +138,7 @@ public class Game extends JPanel implements ActionListener , MouseListener,Mouse
 
 		wave = new LinkedList<Tickable>();
 		this.Towers=new LinkedList<>();
-		creeps = game.wave(3);
+		creeps = game.wave(2);
 
 	}
 
@@ -282,9 +282,7 @@ public void actionPerformed(ActionEvent e) {
 				}
 			for(int j=0; j<Towers.size(); j++){
 				Tower t = (Tower) Towers.get(j);
-				System.out.println(t);
-				for(int l=0; l<t.speed; l++){
-					
+				for(int l=0; l<t.speed; l++){					
 					t.tickHAppend(wave);
 				}
 				
