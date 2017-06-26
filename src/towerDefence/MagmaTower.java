@@ -23,7 +23,7 @@ public class MagmaTower extends Tower {
 	
 	@Override
 	public void tickHAppend(LinkedList<Tickable> creeps) {
-		if(counter%(1000/Game.delay)==0){
+		if(counter%(Game.size)==0){
 			for(int i=0; i<creeps.size(); i++){
 				Creep c = (Creep)creeps.get(i);
 				int creepx = c.y;

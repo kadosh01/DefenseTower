@@ -13,7 +13,7 @@ public class DinoTower extends Tower{
     double angle =0;
 	public DinoTower(int x, int y) throws IOException {
 		super(x, y);
-		this.hitArea=1;
+		this.hitArea=2;
 		m=new Image[path.length];
 		for(int i=0;i<m.length;i++){
 			m[i]=ImageIO.read(getClass().getResourceAsStream(path[i]));
@@ -26,9 +26,9 @@ public class DinoTower extends Tower{
 	}
 	@Override
 	public void tickHAppend(LinkedList<Tickable> creeps) {
-		counter++;
-		System.out.println("asda");
-		if(counter==1){
+		
+	
+		if(counter==0){
 			originx=x;
 			originy=y;
 		}
@@ -40,29 +40,51 @@ public class DinoTower extends Tower{
 	    double rad=Math.toRadians(angle);
 	    y =  (int) (originy + Math.sin(rad)*50);
 	    x = (int) (originx + Math.cos(rad)*50);
+	    
+	    if(counter%(Game.size)==0){
+			for(int i=0; i<creeps.size(); i++){
+				Creep c = (Creep)creeps.get(i);
+				int creepx = c.y;
+				int creepy = c.x;
+				int towerx = y;
+				int towery = x;
+				if(creepx>=towerx-hitArea*Game.size & creepx<=towerx+Game.size+Game.size*hitArea && creepy>=towery-Game.size-Game.size*hitArea & creepy<=towery+hitArea*Game.size){
+					c.hit(this);
+					System.out.println("hit");
+				}
+			}
 	  }
+	    counter++;
+	}
 
 		
 	
 	@Override
 	public void visit(Knight k) {
-		// TODO Auto-generated method stub
+		if(k.poisonTime>0)
+			k.life = (int)(k.life-10*k.poison);
+		else k.life = k.life-8;
+		k.im = null;
 		
 	}
 	@Override
 	public void visit(Skeleton s) {
-		// TODO Auto-generated method stub
+		s.life = s.life-15;
+		s.im = null;
 		
 	}
 	@Override
 	public void visit(Mike m) {
-		// TODO Auto-generated method stub
+		m.life = m.life-10;
+		m.im = null;
 		
 	}
 	@Override
 	public void visit(Naji n) {
-		// TODO Auto-generated method stub
+		if(n.poison>0)
+			n.life = (int)(n.life-11*n.poison);
+		else n.life = n.life-11;
+		n.im = null;
 		
 	}
-	
 }
