@@ -16,10 +16,11 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.time.Year;
 import java.util.LinkedList;
 
 import javax.swing.Timer;
-
+import javax.xml.ws.Holder;
 import javax.imageio.ImageIO;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -67,10 +68,10 @@ public class Game extends JPanel implements ActionListener , MouseListener,Mouse
 		super();
 		this.buttonPane = buttonPane;
 		this.g=super.getGraphics();
-		setLayout(null);
-		//setBounds(10, 10, 1700, 1300);
+		buttonPane.setOpaque(false);
+		//setBounds(0, 0, 100, 100);
 		overly = ImageIO.read(getClass().getResourceAsStream("/overly.png"));
-		setPreferredSize( new Dimension( 800, 1600 ) );
+		//setPreferredSize( new Dimension( 800, 1600 ) );
 		timer = new Timer(delay, this);
 		startBtn = new JButton("start");
 		buttonPane.add(startBtn);
@@ -149,11 +150,11 @@ public class Game extends JPanel implements ActionListener , MouseListener,Mouse
 		for(int i=0;i<numOfTowers;i++){
 			Tower t=Towers.get(i);
 			//System.out.println("P x: "+t.x+" y: "+t.y);
-			offGr.drawImage(t.im, t.y, t.x-Tower.size, Tower.size, Tower.size*2, this);
+			offGr.drawImage(t.im, t.y, t.x-t.size, t.size, t.Hsize, this);
 		}
 		/// tower set
 		if(erea!=null){
-			offGr.drawImage(overly, erea.x, erea.y , size,size,this);
+			offGr.drawImage(overly, erea.x, erea.y, size,size,this);
 		}			
 		if(settower!=null){
 			int locy=(erea.x*28)/HIGH;
@@ -172,7 +173,7 @@ public class Game extends JPanel implements ActionListener , MouseListener,Mouse
 							offGr.drawImage(overly, erea.x-j*size, erea.y+i*size, size,size,this);
 					}
 			}
-			offGr.drawImage(move, erea.x, erea.y-Tower.size ,Tower.size,Tower.size*2,this);
+			offGr.drawImage(move, erea.x, erea.y-settower.size ,settower.size,settower.Hsize,this);
 		}
 		/*
 		//pointers 
@@ -227,9 +228,10 @@ public void actionPerformed(ActionEvent e) {
 		}			
 
 		if(e.getSource()==timer){
-			int numOfCreeps = wave.size();
-			for(int i=0; i<numOfCreeps; i++){
+			for(int i=0; i<wave.size(); i++){
 				Creep k = wave.get(i);
+				if(k.life<=0)
+					wave.remove(k);
 				k.tickHAppend(null);
 				if((k.location==end)){
 					wave.remove(k);

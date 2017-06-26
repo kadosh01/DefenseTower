@@ -54,7 +54,7 @@ public class Board {
 			int numOfCreeps = creeps.size();
 			int startx=(start._x*size)-(creepsize-(size));
 			int index = ThreadLocalRandom.current().nextInt(0, numOfCreeps+1);
-			//creeps.add(index, new Knight(startx, (start._y*size-2), start, board));
+			creeps.add(index, new Knight(startx, (start._y*size-2), start, board));
 			
 			index = ThreadLocalRandom.current().nextInt(0, numOfCreeps+1);
 			creeps.add(index, new Skeleton(startx, (start._y*size), start, board));
