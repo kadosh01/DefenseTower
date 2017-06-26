@@ -33,7 +33,7 @@ public class towerswin extends JFrame{
 	private final int imgwidh=50;
 	private final int width=imgwidh*8;
 	private final int high=imghigh*3;
-	public static JLabel Arrowlabel;
+	public JLabel Arrowlabel;
 	public JLabel Poisonlabel;
 	public JLabel MagmaLabel;
 	public JLabel SamLabel;
@@ -66,7 +66,7 @@ public class towerswin extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				try {
 					Game.settower=new ArrowTower(0,0);
-					Arrowlabel.setText("2");
+					Game.arrow = Integer.parseInt(Arrowlabel.getText())-1;
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
