@@ -2,6 +2,7 @@ package towerDefence;
 
 import java.awt.Image;
 import java.io.IOException;
+import java.util.LinkedList;
 
 import javax.imageio.ImageIO;
 
@@ -21,16 +22,21 @@ public class Mike extends Creep{
 	}
 
 	@Override
-	public void tickHAppend(Tickable t) {
+	public void tickHAppend(LinkedList<Tickable> towers) {
 		Cell curr= location;
 		counter++;
 		Cell[][] board= this.board;
 		if(curr._x+curr.next_x<board.length & curr._y+curr.next_y<board.length){
 			x = x + location.next_x;
 			y = y + location.next_y;
-			im=m[counter%m.length];
+		if(counter%(Game.size)==0){
+			if(counter%2==0)
+				im=m[counter%m.length];
+			if(slowTime<=0)
+				speed = 1;
 			if(counter%(Game.size)==0){
 				location = board[curr._x+curr.next_x][curr._y+curr.next_y];
+				slowTime = slowTime-2;
 			}
 		}
 		

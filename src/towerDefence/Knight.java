@@ -2,6 +2,7 @@ package towerDefence;
 
 import java.awt.Image;
 import java.io.IOException;
+import java.util.LinkedList;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -26,21 +27,20 @@ public class Knight extends Creep{
 		
 	}
 	@Override
-	public void tickHAppend(Tickable t) {
+	public void tickHAppend(LinkedList<Tickable> towers) {
 		Cell curr= location;
 		j++;
 		counter+=1;
 		Cell[][] board= this.board;
 		
 		if(curr._x+curr.next_x<board.length & curr._y+curr.next_y<board.length){
-			x = (int)(x + location.next_x);
-			y = (int)(y + location.next_y);
-			//if((j%2==0))
-				im=m[counter%m.length];
-				
+			x = (int)(x + location.next_x*speed);
+			y = (int)(y + location.next_y*speed);
+			im=m[counter%m.length];
 			if(counter%(Game.size)==0){
 				location = board[curr._x+curr.next_x][curr._y+curr.next_y];
 				poisonTime--;
+				slowTime= slowTime-2;
 			}
 		}		
 	}

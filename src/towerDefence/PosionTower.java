@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.io.IOException;
+import java.util.LinkedList;
 
 import javax.imageio.ImageIO;
 
@@ -20,23 +21,34 @@ public class PosionTower extends Tower{
 		im=m[0];
 		this.Hsize=50;
 		this.size=25;
+		this.speed = 1;
 	}
 	
 	@Override
-	public void tickHAppend(Tickable t) {
-		Creep c = (Creep)t;
-		int creepx = c.y;
-		int creepy = c.x;
-		int towerx = y;
-		int towery = x;
+	public void tickHAppend(LinkedList<Tickable> creeps) {
+		Creep c=null;
+		for(int i=0; i<creeps.size(); i++){
+			Creep t = (Creep)creeps.get(i);
+			int creepx = t.y;
+			int creepy = t.x;
+			int towerx = y;
+			int towery = x;
+			if(creepx>=towerx-hitArea*Game.size & creepx<=towerx+Game.size+Game.size*hitArea && creepy>=towery-Game.size-Game.size*hitArea & creepy<=towery+hitArea*Game.size){
+				c = t;
+			}
+		}
 		//System.out.println(c+" life: "+c.life);		
 	
 		if(creepx>=towerx-hitArea*Game.size & creepx<=towerx+Game.size+Game.size*hitArea && creepy>=towery-Game.size-Game.size*hitArea & creepy<=towery+hitArea*Game.size){
-			if(counter%(1000/Game.delay)==0)
+			if(counter%(Game.size)==0){
 				c.hit(this);
-			//System.out.println("hit");
+			System.out.println("hit");
 		}
 		
+		if(c!=null && counter%(Game.size)==0){
+			c.hit(this);
+			System.out.println("hit");
+		}		
 		counter++;
 		im=m[counter%m.length];
 		

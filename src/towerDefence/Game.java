@@ -48,9 +48,9 @@ public class Game extends JPanel implements ActionListener , MouseListener,Mouse
 	public static final int creepsize=Creep.size;
 	private int creep;
 	private int count;
-	private LinkedList<Creep> wave; // creeps on board
-	private LinkedList<Creep> creeps; // 
-	private LinkedList<Tower> Towers;
+	private LinkedList<Tickable> wave; // creeps on board
+	private LinkedList<Tickable> creeps; // 
+	private LinkedList<Tickable> Towers;
 	public JLabel life;
 	public JFrame topFrame ;
 	private Graphics g;
@@ -136,9 +136,9 @@ public class Game extends JPanel implements ActionListener , MouseListener,Mouse
 			}		
 
 
-		wave = new LinkedList<Creep>();
+		wave = new LinkedList<Tickable>();
 		this.Towers=new LinkedList<>();
-		creeps = game.wave(1);
+		creeps = game.wave(3);
 
 	}
 
@@ -156,7 +156,7 @@ public class Game extends JPanel implements ActionListener , MouseListener,Mouse
 		int numOfCreeps = wave.size();
 		while(creep<numOfCreeps){
 			//System.out.println("creep: "+creep);
-			Creep k = wave.get(creep);
+			Creep k = (Creep) wave.get(creep);
 			offGr.drawImage(k.im, k.y, k.x, creepsize, creepsize, this);					
 			creep++;
 		}
@@ -164,7 +164,7 @@ public class Game extends JPanel implements ActionListener , MouseListener,Mouse
 
 		int numOfTowers = Towers.size();
 		for(int i=0;i<numOfTowers;i++){
-			Tower t=Towers.get(i);
+			Tower t=(Tower) Towers.get(i);
 			//System.out.println("P x: "+t.x+" y: "+t.y);
 			offGr.drawImage(t.im, t.y, t.x-t.size, t.size, t.Hsize, this);
 		}
@@ -248,7 +248,7 @@ public void actionPerformed(ActionEvent e) {
 		}
 		if(e.getSource().equals(startBtn)){
 			if(!creeps.isEmpty()){
-				Creep c= creeps.get(0);
+				Creep c= (Creep) creeps.get(0);
 				creeps.removeFirst();
 				wave.add(c);
 				c.counter = 0;
@@ -264,30 +264,35 @@ public void actionPerformed(ActionEvent e) {
 			count++;
 			timeupdate();
 			for(int i=0; i<wave.size(); i++){
-				Creep k = wave.get(i);
+				Creep k = (Creep) wave.get(i);
 				if(k.life<=0)
 					wave.remove(k);
-				for(int j=1;j<=k.speed;j++){
+				for(int j=1;j<=k.speed;j++)
 					k.tickHAppend(null);
+				if(k.speed<1){
+					if(count%2==1){						
+						k.tickHAppend(null);
+					}
 				}
 				if((k.location==end)){
 					wave.remove(k);
 					game.life--;
 				}
 				for(int j=0; j<Towers.size(); j++){
-					Tower t = Towers.get(j);
-					t.tickHAppend(k);
+					Tower t = (Tower) Towers.get(j);
+					for(int l=0; l<t.speed; l++)
+						t.tickHAppend(wave);
 				}
 				
 				life.setText("HP: "+game.life);
 				repaint();
-			}
-			
+			}			
+			count++;
 			repaint();
 			if(!creeps.isEmpty()){
 				double entercreep=Math.random();
 				if(entercreep<0.02){					
-					Creep c = creeps.get(0);
+					Creep c = (Creep) creeps.get(0);
 					creeps.removeFirst();
 					wave.add(c);
 					c.counter = 0;
