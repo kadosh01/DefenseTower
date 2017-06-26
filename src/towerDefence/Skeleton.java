@@ -29,7 +29,7 @@ public class Skeleton extends Creep{
 			y = y + location.next_y;
 			if(counter%2==0)
 			im=m[counter%m.length];
-			if(counter%(1000/Game.delay)==0){
+			if(counter%(Game.size)==0){
 				location = board[curr._x+curr.next_x][curr._y+curr.next_y];
 			}
 		}		

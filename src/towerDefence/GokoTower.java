@@ -6,7 +6,7 @@ public class GokoTower extends Tower{
 	private final String[] path={"/Tower/Goko/Layer 1.png","/Tower/Goko/Layer 2.png","/Tower/Goko/Layer 3.png","/Tower/Goko/Layer 4.png","/Tower/Goko/Layer 5.png","/Tower/Goko/Layer 6.png","/Tower/Goko/Layer 7.png","/Tower/Goko/Layer 8.png","/Tower/Goko/Layer 9.png"};
 	public GokoTower(int x, int y) throws IOException {
 		super(x, y);
-		this.hitArea=1;
+		this.hitArea=2;
 		m=new Image[path.length];
 		for(int i=0;i<m.length;i++)
 			m[i]=ImageIO.read(getClass().getResourceAsStream(path[i]));
@@ -17,6 +17,7 @@ public class GokoTower extends Tower{
 	@Override
 	public void tickHAppend(Tickable t) {
 		counter++;
+		
 		im=m[counter%m.length];		
 	}
 	

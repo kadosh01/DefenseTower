@@ -43,8 +43,8 @@ public class Game extends JPanel implements ActionListener , MouseListener,Mouse
 	private BufferedImage[][] map;
 	private Timer timer;
 	public final static int size=25;
-	public final static int gamespeed=1;
-	public static final int delay=(1000/(size)/gamespeed);
+	public static int gamespeed=1;
+	public static int delay=(40);
 	public static final int creepsize=Creep.size;
 	private int creep;
 	private int count;
@@ -60,6 +60,11 @@ public class Game extends JPanel implements ActionListener , MouseListener,Mouse
 	private boolean gamestart=false;
 	public static Tower settower;
 	public static final int HIGH=size*28;
+	private JButton Bgamespeed;
+	private JButton play;
+	int sec=0;
+	int min=0;
+	private JLabel time;
 	/**
 	 * Create the panel.
 	 * @throws IOException 
@@ -74,10 +79,21 @@ public class Game extends JPanel implements ActionListener , MouseListener,Mouse
 		//setPreferredSize( new Dimension( 800, 1600 ) );
 		timer = new Timer(delay, this);
 		startBtn = new JButton("start");
+		this.Bgamespeed = new JButton("Fastforwad");
+		this.play = new JButton("Play");
+		Bgamespeed.setVisible(true);
 		buttonPane.add(startBtn);
-		startBtn.setBounds(478, 428, 201, 59);
-
+		buttonPane.add(Bgamespeed);
+		buttonPane.add(play);
+		play.setVisible(false);
+		startBtn.setBounds(478, 528, 301, 59);
+		time=new JLabel("min:"+min+" sec :"+sec);
+		
+		Bgamespeed.addActionListener(this);
+		play.addActionListener(this);
 		startBtn.addActionListener(this);
+		time.setVisible(true);
+		this.buttonPane.add(time);
 
 
 		//load level
@@ -204,6 +220,7 @@ public class Game extends JPanel implements ActionListener , MouseListener,Mouse
 		}
 	}
 	}
+	if(time!=null)
 	g.drawImage(offIm, 0, 0, this);
 }
 public void addTower(Tower t){
@@ -213,6 +230,22 @@ public void addTower(Tower t){
 @Override
 public void actionPerformed(ActionEvent e) {
 	try{
+		if(e.getSource().equals(Bgamespeed)){
+			Game.gamespeed+=2;
+			Game.delay=Game.delay/Game.gamespeed;
+			this.timer.setDelay(delay);
+			System.out.println(delay);
+			System.out.println("AS");
+			Bgamespeed.setVisible(false);
+			play.setVisible(true);
+		}
+		if(e.getSource().equals(play)){
+			Game.delay=Game.delay*Game.gamespeed;
+			Game.gamespeed-=2;
+			this.timer.setDelay(delay);
+			Bgamespeed.setVisible(true);
+			play.setVisible(false);
+		}
 		if(e.getSource().equals(startBtn)){
 			if(!creeps.isEmpty()){
 				Creep c= creeps.get(0);
@@ -228,11 +261,15 @@ public void actionPerformed(ActionEvent e) {
 		}			
 
 		if(e.getSource()==timer){
+			count++;
+			timeupdate();
 			for(int i=0; i<wave.size(); i++){
 				Creep k = wave.get(i);
 				if(k.life<=0)
 					wave.remove(k);
-				k.tickHAppend(null);
+				for(int j=1;j<=k.speed;j++){
+					k.tickHAppend(null);
+				}
 				if((k.location==end)){
 					wave.remove(k);
 					game.life--;
@@ -246,7 +283,6 @@ public void actionPerformed(ActionEvent e) {
 				repaint();
 			}
 			
-			count++;
 			repaint();
 			if(!creeps.isEmpty()){
 				double entercreep=Math.random();
@@ -325,5 +361,13 @@ public void mouseMoved(MouseEvent e) {
 	repaint();
 
 
+}
+public void timeupdate(){
+	if(count%(1000/delay)==0){
+	if(sec!=59)
+		sec++;
+	else {min++;sec=0;}
+	time.setText("min:"+min+" sec :"+sec);
+	}
 }
 }

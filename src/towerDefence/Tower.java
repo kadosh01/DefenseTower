@@ -23,7 +23,7 @@ public abstract class Tower implements Tickable, Visitor{
 	public Tower(int x,int y) throws IOException{
 		this.x=x;
 		this.y=y;
-		System.out.println("tower x: "+x+" y: "+y);
+		//System.out.println("tower x: "+x+" y: "+y);
 		counter=0;
 		board= Game.board;
 		

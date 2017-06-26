@@ -8,13 +8,14 @@ import javax.swing.ImageIcon;
 
 public class Knight extends Creep{
 	
-	private final String[] path={"/Knight/Layer 4.png","/Knight/Layer 5.png","/Knight/Layer 6.png","/Knight/Layer 7.png","/Knight/Layer 8.png","/Knight/Layer 9.png","/Knight/Layer 10.png","/Knight/Layer 11.png","/Knight/Layer 12.png","/Knight/Layer 13.png"};
+	private final String[] path={"/Knight/Layer 1.png","/Knight/Layer 2.png","/Knight/Layer 3.png","/Knight/Layer 4.png","/Knight/Layer 5.png","/Knight/Layer 6.png","/Knight/Layer 7.png","/Knight/Layer 8.png"};
 	protected double poison;
 	protected double poisonTime;
+	private int j=0;
 	
 	public Knight(int x,int y, Cell cell, Cell[][] board) throws IOException{
 		super(cell, board);
-		this.speed=2;
+		this.speed=1;
 		this.x=x;
 		this.y=y;
 		this.poison = 1;
@@ -27,13 +28,17 @@ public class Knight extends Creep{
 	@Override
 	public void tickHAppend(Tickable t) {
 		Cell curr= location;
-		counter++;
+		j++;
+		counter+=1;
 		Cell[][] board= this.board;
+		
 		if(curr._x+curr.next_x<board.length & curr._y+curr.next_y<board.length){
-			x = (int)(x + location.next_x*speed);
-			y = (int)(y + location.next_y*speed);
-			im=m[counter%m.length];
-			if(counter%(double)((1000/Game.delay)/speed)==0){
+			x = (int)(x + location.next_x);
+			y = (int)(y + location.next_y);
+			//if((j%2==0))
+				im=m[counter%m.length];
+				
+			if(counter%(Game.size)==0){
 				location = board[curr._x+curr.next_x][curr._y+curr.next_y];
 				poisonTime--;
 			}
