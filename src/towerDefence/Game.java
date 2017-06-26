@@ -374,6 +374,8 @@ public void mouseClicked(MouseEvent e) {
 			win.MagicLabel.setText(""+magic);
 			win.MagmaLabel.setText(""+lava);
 			win.DinoLabel.setText(""+dino);
+			win.GokuLabel.setText(""+goku);
+			win.SamLabel.setText(""+sam);
 			}
 		else{
 			JFrame f=new JFrame();
