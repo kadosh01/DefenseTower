@@ -29,8 +29,6 @@ public class Mike extends Creep{
 		if(curr._x+curr.next_x<board.length & curr._y+curr.next_y<board.length){
 			x = x + location.next_x;
 			y = y + location.next_y;
-		if(counter%(Game.size)==0){
-			if(counter%2==0)
 				im=m[counter%m.length];
 			if(slowTime<=0)
 				speed = 1;
@@ -41,6 +39,7 @@ public class Mike extends Creep{
 		}
 		
 	}
+	
 
 	@Override
 	public void accept(Visitor v) {

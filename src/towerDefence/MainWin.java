@@ -56,7 +56,7 @@ public class MainWin extends JFrame implements ActionListener{
 		JButton newGame = new JButton("New Game");
 		newGame.setHideActionText(true);
 		contentPane.add(newGame);
-		newGame.setIcon(new ImageIcon(this.getClass().getResource("/new_Game.png")));
+		newGame.setIcon(new ImageIcon(getClass().getResource("/new_Game.png")));
 		newGame.setBorderPainted(false);
 		newGame.setContentAreaFilled(false);
 		newGame.setMargin(new Insets(2, 14, 2, 0));
@@ -80,13 +80,13 @@ public class MainWin extends JFrame implements ActionListener{
 		levels.setFocusPainted(false);
 		levels.setIconTextGap(0);
 		levels.setBounds(574, 227, 309, 73);
-		levels.setIcon(new ImageIcon(this.getClass().getResource("/Levels Select.png")));
+		levels.setIcon(new ImageIcon(getClass().getResource("/Levels Select.png")));
 		contentPane.add(levels);
 		
 		JButton button = new JButton("");
 		button.setIconTextGap(0);
 		button.setFocusPainted(false);
-		button.setIcon(new ImageIcon(this.getClass().getResource("/Exit.png")));
+		button.setIcon(new ImageIcon(getClass().getResource("/Exit.png")));
 		button.setContentAreaFilled(false);
 		button.setBorderPainted(false);
 		button.setBounds(583, 337, 295, 63);

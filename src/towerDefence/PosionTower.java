@@ -37,13 +37,6 @@ public class PosionTower extends Tower{
 				c = t;
 			}
 		}
-		//System.out.println(c+" life: "+c.life);		
-	
-		if(creepx>=towerx-hitArea*Game.size & creepx<=towerx+Game.size+Game.size*hitArea && creepy>=towery-Game.size-Game.size*hitArea & creepy<=towery+hitArea*Game.size){
-			if(counter%(Game.size)==0){
-				c.hit(this);
-			System.out.println("hit");
-		}
 		
 		if(c!=null && counter%(Game.size)==0){
 			c.hit(this);

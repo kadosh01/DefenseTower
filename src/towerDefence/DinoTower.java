@@ -21,11 +21,13 @@ public class DinoTower extends Tower{
 		im=m[0];
 		this.Hsize=50;
 		this.size=25;
+		this.speed=1;
 		
 	}
 	@Override
-	public void tickHAppend(Tickable t) {
+	public void tickHAppend(LinkedList<Tickable> creeps) {
 		counter++;
+		System.out.println("asda");
 		if(counter==1){
 			originx=x;
 			originy=y;

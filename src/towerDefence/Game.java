@@ -88,7 +88,7 @@ public class Game extends JPanel implements ActionListener , MouseListener,Mouse
 		play.setVisible(false);
 		startBtn.setBounds(478, 528, 301, 59);
 		time=new JLabel("min:"+min+" sec :"+sec);
-		
+		buttonPane.setBounds(0, 200, 200, 600);
 		Bgamespeed.addActionListener(this);
 		play.addActionListener(this);
 		startBtn.addActionListener(this);
@@ -109,7 +109,7 @@ public class Game extends JPanel implements ActionListener , MouseListener,Mouse
 		}
 
 		life=new JLabel(("HP: "+game.life));
-		life.setBounds(100, 100, 100, 100);
+		life.setBounds(100, 100, 100, 200);
 		buttonPane.add(life);
 		//load pics
 		map=new BufferedImage[board.length][board[0].length];
@@ -278,10 +278,14 @@ public void actionPerformed(ActionEvent e) {
 					wave.remove(k);
 					game.life--;
 				}
-				for(int j=0; j<Towers.size(); j++){
-					Tower t = (Tower) Towers.get(j);
-					for(int l=0; l<t.speed; l++)
-						t.tickHAppend(wave);
+				
+				}
+			for(int j=0; j<Towers.size(); j++){
+				Tower t = (Tower) Towers.get(j);
+				System.out.println(t);
+				for(int l=0; l<t.speed; l++){
+					
+					t.tickHAppend(wave);
 				}
 				
 				life.setText("HP: "+game.life);
