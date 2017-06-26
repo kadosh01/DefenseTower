@@ -7,6 +7,7 @@ import java.awt.Button;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.EventQueue;
+import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,10 +15,13 @@ import java.io.IOException;
 
 import javax.swing.border.EmptyBorder;
 import javax.swing.BoxLayout;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.SwingConstants;
+import java.awt.ComponentOrientation;
 
 public class Levels extends JPanel implements ActionListener{
 	JButton level1;
@@ -29,17 +33,25 @@ public class Levels extends JPanel implements ActionListener{
 	 */
 	public Levels() {
 		setLayout(null);
-		level1 = new JButton("level 1");
-		level1.setBounds(103, 222, 210, 178);
+		level1 = new JButton("");
+		
+		
+		level1.setBounds(350, 55, 289, 59);
 		add(level1);
+		level1.setIcon(new ImageIcon(this.getClass().getResource("/level1.png")));
+		level1.setContentAreaFilled(false);
 		level1.addActionListener(this);
 		
-		level2 = new JButton("level 2");
-		level2.setBounds(493, 222, 210, 178);
+		level2 = new JButton("");
+		level2.setBounds(350, 155, 289, 65);
+		level2.setIcon(new ImageIcon(this.getClass().getResource("/level2.png")));
+		level2.setContentAreaFilled(false);
 		add(level2);
 		
-		level3 = new JButton("level 3");
-		level3.setBounds(889, 222, 210, 178);
+		level3 = new JButton("");
+		level3.setIcon(new ImageIcon(this.getClass().getResource("/level3.png")));
+		level3.setBounds(350, 255, 289, 65);
+		level3.setContentAreaFilled(false);
 		add(level3);
 		
 		JLabel bbg=new JLabel(new ImageIcon(this.getClass().getResource("/bglevels.png")));
