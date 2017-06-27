@@ -40,7 +40,7 @@ public class PosionTower extends Tower{
 		
 		if(c!=null && counter%(Game.size)==0){
 			c.hit(this);
-			System.out.println("hit");
+		//	System.out.println("hit");
 		}		
 		counter++;
 		im=m[counter%m.length];

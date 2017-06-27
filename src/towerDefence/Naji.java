@@ -28,11 +28,12 @@ public class Naji extends Creep{
 		Cell curr= location;
 		counter++;
 		Cell[][] board= this.board;
+		System.out.println("x"+x+"y "+y);
 		if(curr._x+curr.next_x<board.length & curr._y+curr.next_y<board.length){
 			x = x + location.next_x;
 			y = y + location.next_y;
 			im=m[counter%m.length];
-			//System.out.println("qead"+counter);
+			
 			if(slowTime<=0)
 				speed = 2;
 			if(counter%Game.size==0){
