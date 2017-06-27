@@ -9,11 +9,11 @@ import javax.swing.Timer;
 
 public class Board {
 	public Cell[][] board;
-	//private LinkedList<Cell> creepsRoad;
+	private LinkedList<Cell> creepsRoad;
 	private LinkedList<Tower> towers;
 	private Cell start;
 	private int size = 25;
-	//private int wave;
+	private int wave;
 	private final int creepsize=Creep.size;
 	public int life=20;
 	
@@ -47,7 +47,7 @@ public class Board {
 			amount = 16;
 			break;
 		default:
-			return null;
+			amount = 0;
 				
 		}
 		for(int i=0; i<amount; i++){
@@ -55,12 +55,12 @@ public class Board {
 			int startx=(start._x*size)-(creepsize-(size));
 			int index = ThreadLocalRandom.current().nextInt(0, numOfCreeps+1);
 			creeps.add(index, new Knight(startx, (start._y*size), start, board));
-			index = ThreadLocalRandom.current().nextInt(0, numOfCreeps+1);
-			creeps.add(index, new Skeleton(startx, (start._y*size), start, board));
-			index = ThreadLocalRandom.current().nextInt(0, numOfCreeps+1);
-			creeps.add(index, new Mike(startx, (start._y*size), start, board));
-			index = ThreadLocalRandom.current().nextInt(0, numOfCreeps+1);
-			creeps.add(index, new Naji(startx, (start._y*size), start, board));
+			//index = ThreadLocalRandom.current().nextInt(0, numOfCreeps+1);
+			//creeps.add(index, new Skeleton(startx, (start._y*size), start, board));
+			//index = ThreadLocalRandom.current().nextInt(0, numOfCreeps+1);
+			//creeps.add(index, new Mike(startx, (start._y*size), start, board));
+			//index = ThreadLocalRandom.current().nextInt(0, numOfCreeps+1);
+			//creeps.add(index, new Naji(startx, (start._y*size), start, board));
 			
 		}
 		return creeps;
