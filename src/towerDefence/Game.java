@@ -389,17 +389,9 @@ public void mouseClicked(MouseEvent e) {
 			}
 		}
 	
-		if(!towerpresent){
-			
+		if(!towerpresent){			
 			towerswin win=new towerswin(erea.y, erea.x,this);
 			win.setVisible(true);
-			win.Arrowlabel.setText(""+arrow);
-			win.Poisonlabel.setText(""+poison);
-			win.MagicLabel.setText(""+magic);
-			win.MagmaLabel.setText(""+lava);
-			win.DinoLabel.setText(""+dino);
-			win.GokuLabel.setText(""+goku);
-			win.SamLabel.setText(""+sam);
 			}
 		else{
 			JFrame f=new JFrame();
