@@ -21,11 +21,19 @@ import java.util.LinkedList;
 
 import javax.swing.Timer;
 import javax.xml.ws.Holder;
+
+import org.ietf.jgss.MessageProp;
+
+
+
 import javax.imageio.ImageIO;
 import javax.swing.BoxLayout;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 import java.awt.AlphaComposite;
 import java.awt.Color;
@@ -68,6 +76,7 @@ public class Game extends JPanel implements ActionListener , MouseListener,Mouse
 	int sec=0;
 	int min=0;
 	private JLabel time;
+	private JLabel wavecounter;
 	private boolean puse=false;
 	private Tower te=null;
 	public static int arrow=3;
@@ -77,6 +86,7 @@ public class Game extends JPanel implements ActionListener , MouseListener,Mouse
 	public static int dino=1;
 	public static int sam=1;
 	public static int goku=1;
+	private int wavenum=0;
 	/**
 	 * Create the panel.
 	 * @throws IOException 
@@ -96,6 +106,7 @@ public class Game extends JPanel implements ActionListener , MouseListener,Mouse
 		this.play = new JButton("Play");
 		this.pause = new JButton("Pause");
 		this.go = new JButton("Go");
+		wavecounter= new JLabel("Wave :"+wavenum);
 		Bgamespeed.setVisible(true);
 		pause.setVisible(true);
 		go.setVisible(false);
@@ -104,6 +115,7 @@ public class Game extends JPanel implements ActionListener , MouseListener,Mouse
 		buttonPane.add(play);
 		buttonPane.add(pause);
 		buttonPane.add(go);
+		buttonPane.add(wavecounter);
 		play.setVisible(false);
 		startBtn.setBounds(478, 528, 301, 59);
 		time=new JLabel("min:"+min+" sec :"+sec);
@@ -160,7 +172,7 @@ public class Game extends JPanel implements ActionListener , MouseListener,Mouse
 
 		wave = new LinkedList<Tickable>();
 		this.Towers=new LinkedList<>();
-		creeps = game.wave(1);
+		
 
 	}
 
@@ -256,8 +268,8 @@ public void actionPerformed(ActionEvent e) {
 			Game.gamespeed+=2;
 			Game.delay=Game.delay/Game.gamespeed;
 			this.timer.setDelay(delay);
-			System.out.println(delay);
-			System.out.println("AS");
+			//System.out.println(delay);
+			//System.out.println("AS");
 			Bgamespeed.setVisible(false);
 			play.setVisible(true);
 		}
@@ -285,7 +297,13 @@ public void actionPerformed(ActionEvent e) {
 			play.setVisible(false);
 		}
 		if(e.getSource().equals(startBtn)){
-			if(!creeps.isEmpty()){
+			if(wave.isEmpty() | wave==null){
+					System.out.println("asddd");
+					waveupdate();
+					
+					}
+			
+			if(creeps!=null && !creeps.isEmpty()){
 				Creep c= (Creep) creeps.get(0);
 				creeps.removeFirst();
 				wave.add(c);
@@ -298,12 +316,16 @@ public void actionPerformed(ActionEvent e) {
 					gamestart=true;
 				}
 			}
+			
+			
 
 		}			
 
 		if(e.getSource()==timer){
 			
 			timeupdate();
+			if(wave.isEmpty() & wavenum==5)
+				waveupdate();
 			for(int i=0; i<wave.size(); i++){
 				Creep k = (Creep) wave.get(i);
 				if(k.life<=0)
@@ -366,7 +388,9 @@ public void mouseClicked(MouseEvent e) {
 				te=t;
 			}
 		}
+	
 		if(!towerpresent){
+			
 			towerswin win=new towerswin(erea.y, erea.x,this);
 			win.setVisible(true);
 			win.Arrowlabel.setText(""+arrow);
@@ -416,14 +440,25 @@ public void mouseClicked(MouseEvent e) {
 			});
 		}
 		this.validate();
+		
 	}
 	if(settower!=null){
+		for(int i=0;i<Towers.size();i++){
+			Tower t=(Tower)Towers.get(i);
+			if((t.x==erea.y & t.y==erea.x)){
+				towerpresent=true;
+				
+			}
+		}
+		if(!(towerpresent)){
 		if((x+1 <board.length & y+1<board[0].length ) && (!board[x][y].isRoad())){
 			settower.setLocation(erea.y, erea.x);
 			addTower(settower);
 			settower=null;
 		}
+		}
 	}
+	
 	repaint();
 }
 
@@ -472,5 +507,20 @@ public void timeupdate(){
 	else {min++;sec=0;}
 	time.setText("min:"+min+" sec :"+sec);
 	}
+
 }
+
+public void waveupdate() throws IOException{
+	wavenum++;
+	if(wavenum<6  & wave.isEmpty()){
+		System.out.println("asdadadadad");
+		creeps = game.wave(wavenum);
+		
+		wavecounter.setText("Wave :"+wavenum);
+	}
+	if(wavenum==6){
+		Icon a=new ImageIcon(this.getClass().getResource("/tower1.png"));
+		JOptionPane.showMessageDialog(null, "Well Done!!"+"\n", "Win", JOptionPane.INFORMATION_MESSAGE, a);
+	}
+	}
 }

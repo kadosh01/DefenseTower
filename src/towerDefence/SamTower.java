@@ -31,7 +31,7 @@ public class SamTower extends Tower{
 			if(creepx>=towerx-hitArea*Game.size & creepx<=towerx+Game.size+Game.size*hitArea && creepy>=towery-Game.size-Game.size*hitArea & creepy<=towery+hitArea*Game.size){
 				c = t;
 				found = true;
-				System.out.println(c+"  "+c.slowTime+"  "+c.speed);
+				//System.out.println(c+"  "+c.slowTime+"  "+c.speed);
 			}
 		}	
 		if(c!=null && counter%(Game.size)==0){

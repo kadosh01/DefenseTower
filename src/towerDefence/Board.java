@@ -55,12 +55,12 @@ public class Board {
 			int startx=(start._x*size)-(creepsize-(size));
 			int index = ThreadLocalRandom.current().nextInt(0, numOfCreeps+1);
 			creeps.add(index, new Knight(startx, (start._y*size), start, board));
-			//index = ThreadLocalRandom.current().nextInt(0, numOfCreeps+1);
-			//creeps.add(index, new Skeleton(startx, (start._y*size), start, board));
-			//index = ThreadLocalRandom.current().nextInt(0, numOfCreeps+1);
-			//creeps.add(index, new Mike(startx, (start._y*size), start, board));
-			//index = ThreadLocalRandom.current().nextInt(0, numOfCreeps+1);
-			//creeps.add(index, new Naji(startx, (start._y*size), start, board));
+			index = ThreadLocalRandom.current().nextInt(0, numOfCreeps+1);
+			creeps.add(index, new Skeleton(startx, (start._y*size), start, board));
+			index = ThreadLocalRandom.current().nextInt(0, numOfCreeps+1);
+			creeps.add(index, new Mike(startx, (start._y*size), start, board));
+			index = ThreadLocalRandom.current().nextInt(0, numOfCreeps+1);
+			creeps.add(index, new Naji(startx, (start._y*size), start, board));
 			
 		}
 		return creeps;

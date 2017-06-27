@@ -31,7 +31,7 @@ public class GokoTower extends Tower{
 				int towery = x;
 				if(creepx>=towerx-hitArea*Game.size & creepx<=towerx+Game.size+Game.size*hitArea && creepy>=towery-Game.size-Game.size*hitArea & creepy<=towery+hitArea*Game.size){
 					c.hit(this);
-					System.out.println("hit");
+					//System.out.println("hit");
 				}
 			}
 				

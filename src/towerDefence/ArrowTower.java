@@ -38,7 +38,7 @@ public class ArrowTower extends Tower{
 	
 		if(c!=null && counter%(1000/Game.delay)==0){
 			c.hit(this);
-			System.out.println("hit");
+		//	System.out.println("hit");
 		}		
 		counter++;
 		im=m[counter%m.length];	
