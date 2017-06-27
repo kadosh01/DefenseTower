@@ -33,7 +33,7 @@ public class towerswin extends JFrame{
 	private final int imgwidh=50;
 	private final int width=imgwidh*8;
 	private final int high=imghigh*3;
-	public JLabel Arrowlabel;
+	public  JLabel Arrowlabel;
 	public JLabel Poisonlabel;
 	public JLabel MagmaLabel;
 	public JLabel SamLabel;
@@ -90,8 +90,7 @@ public class towerswin extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				try {
 					Game.settower=new PosionTower(0,0);
-					//parent.addTower(new PosionTower(x-Tower.size-10,y));
-					//System.out.println("x: "+x+" y: "+y);
+					Game.poison = Integer.parseInt(Poisonlabel.getText())-1;
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -115,15 +114,12 @@ public class towerswin extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				try {
 					Game.settower=new MagicTower(0,0);
-					//parent.addTower(new PosionTower(x-Tower.size-10,y));
-					//System.out.println("x: "+x+" y: "+y);
+					Game.magic = Integer.parseInt(MagicLabel.getText())-1;
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				setVisible(false);
-				
-				
+				setVisible(false);				
 			}
 		});
 		
@@ -141,8 +137,7 @@ public class towerswin extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				try {
 					Game.settower=new MagmaTower(0,0);
-					//parent.addTower(new PosionTower(x-Tower.size-10,y));
-					//System.out.println("x: "+x+" y: "+y);
+					Game.lava = Integer.parseInt(MagmaLabel.getText())-1;
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -166,8 +161,7 @@ public class towerswin extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				try {
 					Game.settower=new SamTower(0,0);
-					//parent.addTower(new PosionTower(x-Tower.size-10,y));
-					//System.out.println("x: "+x+" y: "+y);
+					Game.sam = Integer.parseInt(SamLabel.getText())-1;
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -191,8 +185,7 @@ public class towerswin extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				try {
 					Game.settower=new GokoTower(0,0);
-					//parent.addTower(new PosionTower(x-Tower.size-10,y));
-					//System.out.println("x: "+x+" y: "+y);
+					Game.goku = Integer.parseInt(GokuLabel.getText())-1;
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -216,15 +209,12 @@ public class towerswin extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				try {
 					Game.settower=new DinoTower(0,0);
-					//parent.addTower(new PosionTower(x-Tower.size-10,y));
-					//System.out.println("x: "+x+" y: "+y);
+					Game.dino = Integer.parseInt(DinoLabel.getText())-1;
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				setVisible(false);
-				
-				
+				setVisible(false);				
 			}
 		});
 		m.add(Dino);
@@ -232,9 +222,11 @@ public class towerswin extends JFrame{
 		JScrollPane scrollPane = new JScrollPane();
 		m.add(scrollPane);
 		
-		Arrowlabel = new JLabel("3");
+		Arrowlabel = new JLabel(""+Game.arrow);
 		Arrowlabel.setBounds(75, 131, 21, 26);
 		m.add(Arrowlabel);
+		if(Arrowlabel.getText().equals("0"))
+			arrow.setEnabled(false);
 		
 		JLabel lblArrow = new JLabel("Arrow");
 		lblArrow.setBounds(10, 132, 50, 26);
@@ -244,21 +236,27 @@ public class towerswin extends JFrame{
 		lblPoison.setBounds(118, 132, 50, 26);
 		m.add(lblPoison);
 		
-		Poisonlabel = new JLabel("3");
+		Poisonlabel = new JLabel(""+Game.poison);
 		Poisonlabel.setBounds(178, 131, 21, 26);
 		m.add(Poisonlabel);
+		if(Poisonlabel.getText().equals("0"))
+			posion.setEnabled(false);
 		
-		MagmaLabel = new JLabel("3");
+		MagmaLabel = new JLabel(""+Game.lava);
 		MagmaLabel.setBounds(274, 131, 21, 26);
 		m.add(MagmaLabel);
+		if(MagmaLabel.getText().equals("0"))
+			Magma.setEnabled(false);
 		
 		JLabel lblLava = new JLabel("Lava");
 		lblLava.setBounds(219, 132, 50, 26);
 		m.add(lblLava);
 		
-		SamLabel = new JLabel("1");
+		SamLabel = new JLabel(""+Game.sam);
 		SamLabel.setBounds(341, 294, 21, 26);
 		m.add(SamLabel);
+		if(SamLabel.getText().equals("0"))
+			Sam.setEnabled(false);
 		
 		JLabel lblSam = new JLabel("Sam");
 		lblSam.setBounds(276, 294, 39, 26);
@@ -268,25 +266,32 @@ public class towerswin extends JFrame{
 		lblDino.setBounds(44, 294, 50, 26);
 		m.add(lblDino);
 		
-		DinoLabel = new JLabel("1");
+		DinoLabel = new JLabel(""+Game.dino);
 		DinoLabel.setBounds(109, 294, 21, 26);
 		m.add(DinoLabel);
+		System.out.println(DinoLabel.getText());
+		if(DinoLabel.getText().equals("0"))
+			Dino.setEnabled(false);
 		
 		JLabel lblGoku = new JLabel("Goku");
 		lblGoku.setBounds(161, 297, 50, 26);
 		m.add(lblGoku);
 		
-		GokuLabel = new JLabel("1");
+		GokuLabel = new JLabel(""+Game.goku);
 		GokuLabel.setBounds(226, 297, 21, 26);
 		m.add(GokuLabel);
+		if(GokuLabel.getText().equals("0"))
+			Goko.setEnabled(false);
 		
 		JLabel lblMagic = new JLabel("Magic");
 		lblMagic.setBounds(312, 131, 50, 26);
 		m.add(lblMagic);
 		
-		MagicLabel = new JLabel("3");
+		MagicLabel = new JLabel(""+Game.magic);
 		MagicLabel.setBounds(378, 131, 21, 26);
 		m.add(MagicLabel);
+		if(MagicLabel.getText().equals("0"))
+			Magic.setEnabled(false);
 		Dino.setVisible(true);
 	
 	

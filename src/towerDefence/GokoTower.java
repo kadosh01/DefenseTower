@@ -18,48 +18,66 @@ public class GokoTower extends Tower{
 		im=m[0];
 		this.Hsize=50;
 		this.size=25;
+		this.speed =1;
 	}
 	@Override
-	public void tickHAppend(LinkedList<Tickable> creeps) {
-		
-		if(counter%(1000/Game.delay)==0){
-			for(int i=0; i<creeps.size(); i++){
-				Creep c = (Creep)creeps.get(i);
-				int creepx = c.y;
-				int creepy = c.x;
-				int towerx = y;
-				int towery = x;
-				if(creepx>=towerx-hitArea*Game.size & creepx<=towerx+Game.size+Game.size*hitArea && creepy>=towery-Game.size-Game.size*hitArea & creepy<=towery+hitArea*Game.size){
-					c.hit(this);
-					System.out.println("hit");
-				}
+	public void tickHAppend(LinkedList<Tickable> creeps) {		
+		Creep c=null;
+		for(int i=0; i<creeps.size(); i++){
+			Creep t = (Creep)creeps.get(i);
+			int creepx = t.y;
+			int creepy = t.x;
+			int towerx = y;
+			int towery = x;
+			if(creepx>=towerx-hitArea*Game.size & creepx<=towerx+Game.size+Game.size*hitArea && creepy>=towery-Game.size-Game.size*hitArea & creepy<=towery+hitArea*Game.size){
+				c = t;
 			}
-				
 		}
-				
-		counter++;
 		
+		if(c!=null && counter%(Game.size)==0){
+			c.hit(this);
+			System.out.println("hit");
+		}		
+		counter++;
 		im=m[counter%m.length];		
 			
 	}
 	
 	public void visit(Knight k) {
-		// TODO Auto-generated method stub
-		
+		k.im = null;
+		k.K = 7;
+		k.gokuHit++;
+		if(k.gokuHit>=10)
+			k.H = k.H*2;
+		k.life = k.life-(k.H*k.K);		
 	}
 	@Override
 	public void visit(Skeleton s) {
-		// TODO Auto-generated method stub
+		s.im = null;
+		s.K = 10;
+		s.gokuHit++;
+		if(s.gokuHit>=10)
+			s.H = s.H*2;
+		s.life = s.life-(s.H*s.K);
 		
 	}
 	@Override
 	public void visit(Mike m) {
-		// TODO Auto-generated method stub
+		m.im = null;
+		m.K = 5;
+		m.gokuHit++;
+		if(m.gokuHit>=10)
+			m.H = m.H*2;
+		m.life = m.life-(m.H*m.K);
 		
 	}
 	@Override
 	public void visit(Naji n) {
-		// TODO Auto-generated method stub
-		
+		n.im = null;
+		n.K = 5;
+		n.gokuHit++;
+		if(n.gokuHit>=10)
+			n.H = n.H*2;
+		n.life = n.life-(n.H*n.K);		
 	}
 }

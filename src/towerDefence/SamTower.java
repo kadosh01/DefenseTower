@@ -20,26 +20,24 @@ public class SamTower extends Tower{
 	}
 	@Override
 	public void tickHAppend(LinkedList<Tickable> creeps) {
-		Creep c=null;
-		boolean found= false;
-		for(int i=0; i<creeps.size() & !found; i++){
-			Creep t = (Creep)creeps.get(i);
-			int creepx = t.y;
-			int creepy = t.x;
-			int towerx = y;
-			int towery = x;
-			if(creepx>=towerx-hitArea*Game.size & creepx<=towerx+Game.size+Game.size*hitArea && creepy>=towery-Game.size-Game.size*hitArea & creepy<=towery+hitArea*Game.size){
-				c = t;
-				found = true;
-				System.out.println(c+"  "+c.slowTime+"  "+c.speed);
+		if(counter%(1000/Game.delay)==0){
+			for(int i=0; i<creeps.size(); i++){
+				Creep c = (Creep)creeps.get(i);
+				int creepx = c.y;
+				int creepy = c.x;
+				int towerx = y;
+				int towery = x;
+				if(creepx>=towerx-hitArea*Game.size & creepx<=towerx+Game.size+Game.size*hitArea && creepy>=towery-Game.size-Game.size*hitArea & creepy<=towery+hitArea*Game.size){
+					c.hit(this);
+					System.out.println("hit");
+				}
 			}
-		}	
-		if(c!=null && counter%(Game.size)==0){
-			c.hit(this);
-			
-		}		
+				
+		}
+				
 		counter++;
-		im=m[counter%m.length];		
+		
+		im=m[counter%m.length];	
 	}
 	
 	public void visit(Knight k) {

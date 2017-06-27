@@ -25,6 +25,7 @@ public abstract class Creep implements Tickable, Visited{
 		location= first;
 		this.board = board;
 		this.slowTime = 0;
+		this.H = 1;
 	}
 	
 	public void hit(Tower t){

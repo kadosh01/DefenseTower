@@ -35,7 +35,6 @@ public class Skeleton extends Creep{
 			if(counter%(Game.size)==0){
 				location = board[curr._x+curr.next_x][curr._y+curr.next_y];
 				slowTime= slowTime-2;
-				System.out.println("decrease slowTime: "+slowTime);
 			}
 		}		
 	}
