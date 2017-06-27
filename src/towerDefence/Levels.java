@@ -66,8 +66,7 @@ public class Levels extends JPanel implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(e.getSource().equals(level1)){
-			setVisible(false);
+			
 			JFrame topFrame = (JFrame) SwingUtilities.windowForComponent(this);
 			
 			try {
@@ -76,10 +75,12 @@ public class Levels extends JPanel implements ActionListener{
 				}
 				if(e.getSource().equals(level2)){
 					frame =new gamewin(1);
+					System.out.println("asd");
 					}
 				if(e.getSource().equals(level3)){
 					frame =new gamewin(2);
 					}
+				setVisible(false);
 				frame.setVisible(true);
 				topFrame.setVisible(false);
 				
@@ -95,4 +96,4 @@ public class Levels extends JPanel implements ActionListener{
 	}
 
 
-}
+
