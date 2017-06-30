@@ -389,9 +389,11 @@ public void mouseClicked(MouseEvent e) {
 			}
 		}
 	
-		if(!towerpresent){			
+		if(!towerpresent){	
+			if(!gamestart){
 			towerswin win=new towerswin(erea.y, erea.x,this);
 			win.setVisible(true);
+			}
 			}
 		else{
 			JFrame f=new JFrame();
