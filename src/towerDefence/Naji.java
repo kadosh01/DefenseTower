@@ -10,7 +10,7 @@ public class Naji extends Creep{
 	private final String[] path={"/Ninja/Layer 4.png","/Ninja/Layer 5.png","/Ninja/Layer 6.png","/Ninja/Layer 7.png","/Ninja/Layer 8.png","/Ninja/Layer 9.png","/Ninja/Layer 10.png","/Ninja/Layer 11.png","/Ninja/Layer 12.png","/Ninja/Layer 13.png"};
 	protected double poison;
 	protected double poisonTime;
-	
+	public Image hitim=ImageIO.read(getClass().getResourceAsStream("/Ninja/hit.png"));
 	public Naji(int x,int y, Cell cell, Cell[][] board) throws IOException{
 			super(cell, board);
 			this.speed=2;

@@ -7,7 +7,7 @@ import javax.imageio.ImageIO;
 public class MagicTower extends Tower{
 	
 	private final String[] path={"/Tower/Magic/Layer 1.png","/Tower/Magic/Layer 2.png","/Tower/Magic/Layer 3.png","/Tower/Magic/Layer 4.png","/Tower/Magic/Layer 5.png","/Tower/Magic/Layer 6.png","/Tower/Magic/Layer 7.png","/Tower/Magic/Layer 8.png","/Tower/Magic/Layer 9.png","/Tower/Magic/Layer 10.png","/Tower/Magic/Layer 11.png"};
-	
+	public Image hitim=ImageIO.read(getClass().getResourceAsStream("/Tower/Magic/hit.png"));
 	public MagicTower(int x, int y) throws IOException {
 		super(x, y);
 		this.hitArea=1;
@@ -47,19 +47,22 @@ public class MagicTower extends Tower{
 		if(k.poisonTime>0)
 			k.life = (int)(k.life-30*k.poison);
 		else k.life = k.life-30;
-		k.im = null;
+		k.im = k.hitim;
+		im=hitim;
 		
 	}
 	@Override
 	public void visit(Skeleton s) {
 		s.life = s.life-25;
-		s.im = null;
+		s.im = s.hitim;
+		im=hitim;
 		
 	}
 	@Override
 	public void visit(Mike m) {
 		m.life = m.life-10;
-		m.im = null;
+		m.im = m.hitim;
+		im=hitim;
 		
 	}
 	@Override
@@ -67,6 +70,7 @@ public class MagicTower extends Tower{
 		if(n.poisonTime>0)
 			n.life = (int)(n.life-10*n.poison);
 		else n.life = n.life-10;
-		n.im = null;		
+		n.im = n.hitim;
+		im=hitim;	
 	}
 }

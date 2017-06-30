@@ -8,7 +8,7 @@ import javax.imageio.ImageIO;
 
 public class Skeleton extends Creep{
 	private final String[] path={"/skeleton/Layer 1.png","/skeleton/Layer 2.png","/skeleton/Layer 3.png"};
-
+	public Image hitim=ImageIO.read(getClass().getResourceAsStream("/skeleton/hit.png"));
 	public Skeleton(int x, int y, Cell cell, Cell[][] board) throws IOException {
 		super(cell, board);
 		this.speed=1;

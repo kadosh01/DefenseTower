@@ -10,7 +10,7 @@ import javax.imageio.ImageIO;
 
 public class PosionTower extends Tower{
 	private final String[] path={"/Tower/Posion/Layer 1.png","/Tower/Posion/Layer 2.png","/Tower/Posion/Layer 3.png","/Tower/Posion/Layer 4.png","/Tower/Posion/Layer 5.png","/Tower/Posion/Layer 6.png","/Tower/Posion/Layer 7.png","/Tower/Posion/Layer 8.png","/Tower/Posion/Layer 9.png"};
-	
+	public Image hitim=ImageIO.read(getClass().getResourceAsStream("/Tower/Posion/hit.png"));
 	
 	public PosionTower(int x, int y) throws IOException {
 		super(x, y);
@@ -51,13 +51,15 @@ public class PosionTower extends Tower{
 	public void visit(Knight k) {
 		k.poison = 2;
 		k.poisonTime = 5;
-		k.im = null;
+		k.im = k.hitim;
+		im=hitim;
 	}
 
 	@Override
 	public void visit(Skeleton s) {
 		s.life = s.life-20;
-		s.im = null;
+		s.im = s.hitim;
+		im=hitim;
 		
 	}
 
@@ -71,7 +73,8 @@ public class PosionTower extends Tower{
 	public void visit(Naji n) {
 		n.poison = 1.5;
 		n.poisonTime = 5;	
-		n.im = null;
+		n.im = n.hitim;
+		im=hitim;
 	}
 
 	

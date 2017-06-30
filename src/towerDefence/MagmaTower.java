@@ -8,7 +8,7 @@ import javax.imageio.ImageIO;
 public class MagmaTower extends Tower {
 	
 	private final String[] path={"/Tower/Magma/Layer 1.png","/Tower/Magma/Layer 2.png","/Tower/Magma/Layer 3.png","/Tower/Magma/Layer 4.png","/Tower/Magma/Layer 5.png","/Tower/Magma/Layer 6.png","/Tower/Magma/Layer 7.png"};
-	
+	public Image hitim=ImageIO.read(getClass().getResourceAsStream("/Tower/Magma/hit.png"));
 	public MagmaTower(int x, int y) throws IOException {
 		super(x, y);
 		this.hitArea=1;
@@ -47,19 +47,22 @@ public class MagmaTower extends Tower {
 		if(k.poisonTime>0)
 			k.life = (int)(k.life-10*k.poison);
 		else k.life = k.life-10;
-		k.im = null;
+		k.im = k.hitim;
+		im=hitim;
 		
 	}
 	@Override
 	public void visit(Skeleton s) {
 		s.life = s.life-15;
-		s.im = null;
+		s.im = s.hitim;
+		im=hitim;
 		
 	}
 	@Override
 	public void visit(Mike m) {
 		m.life = m.life-15;
-		m.im = null;
+		m.im = m.hitim;
+		im=hitim;
 		
 	}
 	@Override
@@ -67,7 +70,8 @@ public class MagmaTower extends Tower {
 		if(n.poison>0)
 			n.life = (int)(n.life-15*n.poison);
 		else n.life = n.life-15;
-		n.im = null;
+		n.im = n.hitim;
+		im=hitim;
 		
 	}
 }

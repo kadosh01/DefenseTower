@@ -8,7 +8,7 @@ import javax.imageio.ImageIO;
 public class GokoTower extends Tower{
 	
 	private final String[] path={"/Tower/Goko/Layer 1.png","/Tower/Goko/Layer 2.png","/Tower/Goko/Layer 3.png","/Tower/Goko/Layer 4.png","/Tower/Goko/Layer 5.png","/Tower/Goko/Layer 6.png","/Tower/Goko/Layer 7.png","/Tower/Goko/Layer 8.png","/Tower/Goko/Layer 9.png"};
-	
+	public Image hitim=ImageIO.read(getClass().getResourceAsStream("/Tower/Goko/hit.png"));
 	public GokoTower(int x, int y) throws IOException {
 		super(x, y);
 		this.hitArea=2;
@@ -44,40 +44,48 @@ public class GokoTower extends Tower{
 	}
 	
 	public void visit(Knight k) {
-		k.im = null;
+		k.im = k.hitim;
+		im=hitim;
 		k.K = 7;
 		k.gokuHit++;
 		if(k.gokuHit>=10)
 			k.H = k.H*2;
-		k.life = k.life-(k.H*k.K);		
+		k.life = k.life-(k.H*k.K);	
+		
 	}
 	@Override
 	public void visit(Skeleton s) {
-		s.im = null;
+		s.im = s.hitim;
+		im=hitim;
 		s.K = 10;
 		s.gokuHit++;
 		if(s.gokuHit>=10)
 			s.H = s.H*2;
 		s.life = s.life-(s.H*s.K);
 		
+		
 	}
 	@Override
 	public void visit(Mike m) {
-		m.im = null;
+		m.im = m.hitim;
+		im=hitim;
 		m.K = 5;
 		m.gokuHit++;
 		if(m.gokuHit>=10)
 			m.H = m.H*2;
 		m.life = m.life-(m.H*m.K);
 		
+		
 	}
 	@Override
 	public void visit(Naji n) {
-		n.im = null;
+		n.im = n.hitim;
+		im=hitim;
 		n.K = 5;
 		n.gokuHit++;
 		if(n.gokuHit>=10)
 			n.H = n.H*2;
-		n.life = n.life-(n.H*n.K);		
+		n.life = n.life-(n.H*n.K);	
+		
 	}
 }

@@ -8,7 +8,7 @@ import javax.imageio.ImageIO;
 
 public class ArrowTower extends Tower{
 	private final String[] path={"/Tower/Arrow/Layer 1.gif","/Tower/Arrow/Layer 2.gif","/Tower/Arrow/Layer 3.gif","/Tower/Arrow/Layer 4.gif","/Tower/Arrow/Layer 5.gif","/Tower/Arrow/Layer 6.gif","/Tower/Arrow/Layer 7.gif","/Tower/Arrow/Layer 8.gif","/Tower/Arrow/Layer 9.gif","/Tower/Arrow/Layer 10.gif","/Tower/Arrow/Layer 11.gif","/Tower/Arrow/Layer 12.gif"};
-	
+	public Image hitim=ImageIO.read(getClass().getResourceAsStream("/Tower/Arrow/hit.png"));
 	public ArrowTower(int x, int y) throws IOException {
 		super(x, y);
 		this.hitArea=1;
@@ -53,20 +53,23 @@ public class ArrowTower extends Tower{
 	@Override
 	public void visit(Skeleton s) {
 		s.life = s.life-15;
-		s.im = null;
+		s.im = s.hitim;
+		im=hitim;
 		
 	}
 
 	@Override
 	public void visit(Mike m) {
 		m.life = m.life-30;
-		m.im = null;
+		m.im = m.hitim;
+		im=hitim;
 	}
 
 	@Override
 	public void visit(Naji n) {
 		n.life = (int)(n.life-(30*n.poison));
-		n.im = null;
+		n.im = n.hitim;
+		im=hitim;
 		
 	}
 

@@ -8,6 +8,7 @@ import javax.imageio.ImageIO;
 public class DinoTower extends Tower{
 	
 	private final String[] path={"/Tower/Dino/Layer 1.png","/Tower/Dino/Layer 2.png","/Tower/Dino/Layer 3.png","/Tower/Dino/Layer 4.png","/Tower/Dino/Layer 5.png"};
+	public Image hitim=ImageIO.read(getClass().getResourceAsStream("/Tower/Dino/hit.png"));
 	int originy;
 	int originx;
     double angle =0;
@@ -64,19 +65,22 @@ public class DinoTower extends Tower{
 		if(k.poisonTime>0)
 			k.life = (int)(k.life-10*k.poison);
 		else k.life = k.life-8;
-		k.im = null;
+		k.im = k.hitim;
+		im=hitim;
 		
 	}
 	@Override
 	public void visit(Skeleton s) {
 		s.life = s.life-15;
-		s.im = null;
+		s.im = s.hitim;
+		im=hitim;
 		
 	}
 	@Override
 	public void visit(Mike m) {
 		m.life = m.life-10;
-		m.im = null;
+		m.im = m.hitim;
+		im=hitim;
 		
 	}
 	@Override
@@ -84,7 +88,8 @@ public class DinoTower extends Tower{
 		if(n.poison>0)
 			n.life = (int)(n.life-11*n.poison);
 		else n.life = n.life-11;
-		n.im = null;
+		n.im = n.hitim;
+		im=hitim;
 		
 	}
 }

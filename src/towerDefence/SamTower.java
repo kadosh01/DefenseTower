@@ -6,7 +6,7 @@ import javax.imageio.ImageIO;
 public class SamTower extends Tower{
 	
 	private final String[] path={"/Tower/Sam/Layer 1.png","/Tower/Sam/Layer 2.png","/Tower/Sam/Layer 3.png","/Tower/Sam/Layer 4.png","/Tower/Sam/Layer 5.png","/Tower/Sam/Layer 6.png","/Tower/Sam/Layer 7.png","/Tower/Sam/Layer 8.png","/Tower/Sam/Layer 9.png"};
-	
+	public Image hitim=ImageIO.read(getClass().getResourceAsStream("/Tower/Sam/hit.png"));
 	public SamTower(int x, int y) throws IOException {
 		super(x, y);
 		this.hitArea=1;
@@ -44,27 +44,31 @@ public class SamTower extends Tower{
 		System.out.println("knight");
 		k.slowTime = 6;
 		k.speed = k.speed/2;
-		k.im = null;
+		k.im = k.hitim;
+		im=hitim;
 		
 	}
 	@Override
 	public void visit(Skeleton s) {
 		s.slowTime = 3;
 		s.speed = s.speed/2;
-		s.im = null;		
+		s.im = s.hitim;
+		im=hitim;	
 	}
 	@Override
 	public void visit(Mike m) {
 		m.slowTime = 3;
 		m.speed = m.speed/2;
 		m.life = m.life-10;
-		m.im = null;		
+		m.im = m.hitim;
+		im=hitim;
 	}
 	@Override
 	public void visit(Naji n) {
 		n.slowTime = 3;
 		n.speed = n.speed/2;
-		n.im = null;
+		n.im = n.hitim;
+		im=hitim;
 		
 	}
 }
